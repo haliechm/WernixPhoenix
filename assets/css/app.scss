@@ -1,17 +1,19 @@
-@import 'variables.scss';
-@import 'components/header.scss';
+@import "variables.scss";
+@import "components/header.scss";
 
-
-body, html, #root, .full-height {
+body,
+html,
+#root,
+.full-height {
   margin: 0;
   padding: 0;
   height: 100% !important;
   width: 100% !important;
-  font-family: sans-serif;
   background-color: #f5f5f5 !important;
 }
 
-#loginImg, #profileIMG {
+#loginImg,
+#profileIMG {
   display: block;
   max-width: 295px;
   width: auto;
@@ -38,7 +40,7 @@ body, html, #root, .full-height {
 }
 
 .nav-link {
-  cursor: default
+  cursor: default;
 }
 
 tr.data-row td {
@@ -71,7 +73,7 @@ span.applied-filter span.title {
 div.filter-definition-row {
   margin-top: 8px;
   padding: 12px;
-  background-color: #eeeeee;  
+  background-color: #eeeeee;
 }
 
 .clear-filters {
@@ -84,7 +86,8 @@ div.filter-definition-row {
   font-style: italic;
 }
 
-.filter-definition-caption select, .filter-definition-caption div {
+.filter-definition-caption select,
+.filter-definition-caption div {
   font-style: normal;
   font-size: 11pt;
 }
@@ -126,8 +129,9 @@ div.clickable {
   color: $projectSuccessGreen !important;
 }
 
-.projectPrimary, .projectPrimary.btn.btn-secondary,
-  .projectPrimary.btn.btn-secondary.float-right {
+.projectPrimary,
+.projectPrimary.btn.btn-secondary,
+.projectPrimary.btn.btn-secondary.float-right {
   background-color: $projectPrimaryBlue !important;
   border-color: $projectPrimaryBlueDarker !important;
   color: white !important;
@@ -503,8 +507,8 @@ div.clickable {
 }
 
 .projectCardGray {
-  background-color: #EFEFEF!important;
-  border-color: #EFEFEF !important;
+  background-color: #efefef !important;
+  border-color: #efefef !important;
   color: navy !important;
 }
 
@@ -626,7 +630,6 @@ $one3rd: calc(100% / 3);
 
 $oneFifth: calc(100% / 5);
 
-
 @media screen and (max-width: 726px) {
   .fontSize150 {
     font-size: 0.95em !important;
@@ -681,7 +684,7 @@ $oneSeventh: calc(100% / 7);
     font-size: 2.1em;
   }
   .fontSize150 {
-    font-size: 1.50em !important;
+    font-size: 1.5em !important;
   }
 }
 
@@ -702,7 +705,6 @@ $one9th: calc(100% / 9);
     font-size: 2.5em;
   }
 }
-
 
 @media screen and (max-width: 1268px) {
   .statusBadgeText {
@@ -766,7 +768,7 @@ $one9th: calc(100% / 9);
   width: 100%;
 }
 .mediumStatusText {
-  font-size: .85em;
+  font-size: 0.85em;
   color: $projectPrimaryBlueDarkest;
 }
 
@@ -775,7 +777,6 @@ $one9th: calc(100% / 9);
   color: $projectPrimaryBlueDarkest;
   font-weight: bolder;
 }
-
 
 @media screen and (min-width: 768px) and (max-width: 1299px) {
   .mediumStatusText {
@@ -806,7 +807,6 @@ $one9th: calc(100% / 9);
   visibility: hidden;
 }
 
-
 .darkBlueText {
   color: $navy !important;
 }
@@ -818,113 +818,113 @@ $one9th: calc(100% / 9);
 .redFlagColor {
   color: $redFlagColor !important;
 }
-.redFlagBackgroundColor{
+.redFlagBackgroundColor {
   background-color: $redFlagColor !important;
 }
 
 .magentaFlagColor {
   color: $magentaFlagColor !important;
 }
-.magentaFlagBackgroundColor{
+.magentaFlagBackgroundColor {
   background-color: $magentaFlagColor !important;
 }
 
 .purpleFlagColor {
   color: $purpleFlagColor !important;
 }
-.purpleFlagBackgroundColor{
+.purpleFlagBackgroundColor {
   background-color: $purpleFlagColor !important;
 }
 
 .indigoFlagColor {
   color: $indigoFlagColor !important;
 }
-.indigoFlagBackgroundColor{
+.indigoFlagBackgroundColor {
   background-color: $indigoFlagColor !important;
 }
 
 .royalBlueFlagColor {
   color: $royalBlueFlagColor !important;
 }
-.royalBlueFlagBackgroundColor{
+.royalBlueFlagBackgroundColor {
   background-color: $royalBlueFlagColor !important;
 }
 .blueFlagColor {
   color: $blueFlagColor !important;
 }
-.blueFlagBackgroundColor{
+.blueFlagBackgroundColor {
   background-color: $blueFlagColor !important;
 }
 .lightBlueFlagColor {
   color: $lightBlueFlagColor !important;
 }
-.lightBlueFlagBackgroundColor{
+.lightBlueFlagBackgroundColor {
   background-color: $lightBlueFlagColor !important;
 }
 .aquaFlagColor {
   color: $aquaFlagColor !important;
 }
-.aquaFlagBackgroundColor{
+.aquaFlagBackgroundColor {
   background-color: $aquaFlagColor !important;
 }
 .forestFlagColor {
   color: $forestFlagColor !important;
 }
-.forestFlagBackgroundColor{
+.forestFlagBackgroundColor {
   background-color: $forestFlagColor !important;
 }
 .greenFlagColor {
   color: $greenFlagColor !important;
 }
-.greenFlagBackgroundColor{
+.greenFlagBackgroundColor {
   background-color: $greenFlagColor !important;
 }
 .limeFlagColor {
   color: $limeFlagColor !important;
 }
-.limeFlagBackgroundColor{
+.limeFlagBackgroundColor {
   background-color: $limeFlagColor !important;
 }
 .citronFlagColor {
   color: $citronFlagColor !important;
 }
-.citronFlagBackgroundColor{
+.citronFlagBackgroundColor {
   background-color: $citronFlagColor !important;
 }
 .yellowFlagColor {
   color: $yellowFlagColor !important;
 }
-.yellowFlagBackgroundColor{
+.yellowFlagBackgroundColor {
   background-color: $yellowFlagColor !important;
 }
 .sunFlagColor {
   color: $sunFlagColor !important;
 }
-.sunFlagBackgroundColor{
+.sunFlagBackgroundColor {
   background-color: $sunFlagColor !important;
 }
 .orangeFlagColor {
   color: $orangeFlagColor !important;
 }
-.orangeFlagBackgroundColor{
+.orangeFlagBackgroundColor {
   background-color: $orangeFlagColor !important;
 }
 .darkOrangeFlagColor {
   color: $darkOrangeFlagColor !important;
 }
-.darkOrangeFlagBackgroundColor{
+.darkOrangeFlagBackgroundColor {
   background-color: $darkOrangeFlagColor !important;
 }
 .brownFlagColor {
   color: $brownFlagColor !important;
 }
-.brownFlagBackgroundColor{
+.brownFlagBackgroundColor {
   background-color: $brownFlagColor !important;
 }
 .grayFlagColor {
   color: $grayFlagColor !important;
 }
-.grayFlagBackgroundColor{
+.grayFlagBackgroundColor {
   background-color: $grayFlagColor !important;
 }
 .dock-seq {
@@ -947,28 +947,28 @@ $one9th: calc(100% / 9);
 }
 
 .flashColor {
-	background: black;
-	margin: 3px;
-	box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	transform: scale(1);
-	animation: pulse 2s infinite;
+  background: black;
+  margin: 3px;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  transform: scale(1);
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(0.95);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-	}
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
 
-	70% {
-		transform: scale(1);
-		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-	}
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
 
-	100% {
-		transform: scale(0.95);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	}
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 .headerLogo {
@@ -984,4 +984,334 @@ $one9th: calc(100% / 9);
 .profileImage {
   height: 2em !important;
   border-radius: 25%;
+}
+
+// I STARTED ADDING BELOW
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+
+body {
+  font-family: "Raleway", sans-serif !important;
+  overflow-x: hidden !important;
+}
+
+.App {
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+/* .navbar {
+  background-color: #EBECED;
+} */
+
+.navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10;
+}
+
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-margin {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+#main {
+  height: 100vh;
+  width: 99vw;
+}
+
+#main-page-background {
+  height: 100%;
+  width: 100%;
+  /* background-image: url('../../silver-tongue/src/images/worldmap-background.png'); */
+  /* background-color: #320669; */
+  /* background-color: #308552; */
+  /* color: white; */
+  color: #308552;
+  font-size: 1.6rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.language-word-fly-in {
+  position: absolute;
+  width: 110%;
+  /* top: 10%; */
+  left: -100px;
+  /* opacity: 11%; */
+  opacity: 25%;
+  font-size: 1.2rem;
+  text-align: left;
+  z-index: 1;
+  color: #308552;
+}
+
+.main-page-button {
+  width: 100%;
+  margin-bottom: 3%;
+  font-weight: 800 !important;
+  position: relative;
+  z-index: 4;
+  border-radius: 0.8rem !important;
+}
+
+.sign-up-button {
+  background-color: #8ad1a6 !important;
+  border-color: transparent !important;
+  color: white !important;
+}
+
+.sign-up-button:hover {
+  background-color: #476b55 !important;
+}
+
+.account-button {
+  background-color: #1d5232 !important;
+  border-color: transparent !important;
+  color: white !important;
+}
+
+.account-button:hover {
+  background-color: #30744b !important;
+}
+
+#language-carousel {
+  /* background-color: #8AD1A6; */
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 8%;
+  z-index: 2;
+  background-color: #ebeced;
+  /* background-color: #8ad1a6; */
+  /* height: 15%; */
+  /* position: absolute;
+  top: 90%;
+  z-index: 2 */
+}
+
+.homepage-row {
+  margin: 0% 8% 4% 8% !important;
+  /* margin-left: 8% !important;
+  margin-right: 8% !important;
+  margin-bottom: 4%; */
+  border-bottom: 3px solid #8ad1a6;
+  align-items: center;
+}
+
+.wernix-features {
+  font-size: small;
+}
+
+.wernix-features-col {
+  text-align: left;
+}
+
+/* .checkmark {
+ list-style-image: url('/src/images/checkmark-small.png');
+} */
+
+ul.no-bullet {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.checkmark {
+  background: url("../images/checkmark-small.png") no-repeat left top;
+  height: 54px;
+  padding-left: 40px;
+  padding-top: 4px;
+}
+
+li.arrow-small {
+  background: url("../images/arrow-small.png") no-repeat left 29px;
+  /* height: 54px; */
+  padding-left: 40px;
+  padding-top: 29px;
+  display: block;
+}
+
+.modal-dialog {
+  overflow-y: initial !important;
+}
+.modal-body {
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.up-front {
+  z-index: 5;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+ul a {
+  color: #8ad1a6;
+}
+ul a:hover {
+  color: #476b55;
+  text-decoration: none;
+}
+
+.register-form-label {
+  text-align: left;
+}
+
+.pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.bi-eye-css {
+  position: absolute;
+  top: 12%;
+  right: 3%;
+}
+
+.MuiSlider-markLabel {
+  font-size: 0.5rem !important;
+}
+
+.icon-nav {
+  margin-right: 6px;
+}
+
+.profile-top {
+  /* height: 40vh; */
+  width: 100vw;
+  color: #343a40;
+}
+
+.profile-page-background {
+  /* height: 100%; */
+  /* width: 100%; */
+  /* color: #308552; */
+  font-size: 1.6rem;
+  /* align-items: center; */
+  display: flex;
+  justify-content: center;
+  /* text-align: left; */
+}
+
+@media (min-width: 768px) {
+  .large-text-align-left {
+    text-align: left;
+  }
+}
+
+.profile-row {
+  margin: 0% 3% 4% 3% !important;
+  /* margin-left: 8% !important;
+  margin-right: 8% !important;
+  margin-bottom: 4%; */
+  border-bottom: 1px solid #8ad1a6;
+  align-items: center;
+}
+
+.profile-header {
+  /* margin: 10% 23% 4% 23% !important;
+  margin: 4% 4% 4% 4% !important; */
+  /* margin-bottom: 55%; */
+  /* margin-left: 5%;
+  margin-right: 5%; */
+  margin: 0% 12% 0% 12% !important;
+  border-bottom: 1px solid #8ad1a6;
+  padding-bottom: 8px;
+  text-align: left;
+}
+
+.friends-list {
+  /* background-color: #ebeced;
+   background-color: #f8f9fa; */
+  /* border-radius:10px; */
+  /* margin: 2% 2% 2% 2%; */
+  margin-left: 12%;
+  padding-top: 15px;
+  text-align: left;
+
+  /* text-align: left;
+   margin:2% 12% 5% 12%; */
+}
+
+.friends-list a {
+  text-decoration: none;
+  color: #343a40;
+}
+
+.friends-list :hover {
+  color: #8ad1a6;
+  /* text-decoration: underline; */
+  text-decoration: none;
+}
+
+.friends-list i {
+  margin-right: 10px;
+}
+
+/* #friends-list p {
+  font-size: xx-small;
+  margin-bottom:4px;
+
+} */
+
+#language-info {
+  margin-left: 12%;
+  padding-top: 15px;
+  text-align: left;
+  font-size: medium;
+}
+
+.user-modal-button {
+  width: 100%;
+  margin-bottom: 5%;
+  border: none !important;
+}
+
+/* .bi-person-check {
+  color: #8ad1a6;
+} */
+
+.no-text-decoration:hover {
+  text-decoration: none !important;
+}
+
+.font-size-large {
+  font-size: large;
+}
+
+.selected {
+  color: #8ad1a6;
+}
+
+.online {
+  color: #8ad1a6;
+}
+
+.offline {
+  color: gray;
+}
+
+.edit-field {
+  margin-left: 12%;
+  padding-top: 12px;
+}
+
+.edit-field {
+  margin-left: 15%;
+}
+
+@media (min-width: 768px) {
+  .edit-field {
+    margin-left: 18%;
+  }
 }

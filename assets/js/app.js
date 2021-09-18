@@ -9,7 +9,9 @@ import { api, constants, helpers, contexts } from "./utils";
 import {
   Admin,
   Dashboard,
+  Home, // I ADDED THIS
   Layout,
+  Login, // I ADDED THIS
   Profile,
   SignIn,
   User,
@@ -17,7 +19,7 @@ import {
   ReferenceDataList,
   ResetPassword,
   ForgotPassword,
-  UpdatePassword
+  UpdatePassword,
 } from "./pages";
 const { UserContext, SocketContext } = contexts;
 import "../css/app.scss";
@@ -47,12 +49,13 @@ export default function App() {
   const [signInMessageVisible, setSignInMessageVisible] = useState(false);
 
   // socket / channel items
-  const [socket, setSocket] = useState(null)
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    window.addEventListener('click', setLastActivity);
+    window.addEventListener("click", setLastActivity);
     startTimer();
-    if ((nowTime() - window.lastActivityCheckedAt) < constants.TEN_SECONDS_MS) return;
+    if (nowTime() - window.lastActivityCheckedAt < constants.TEN_SECONDS_MS)
+      return;
     compareTimerToLastActivity();
   }, []);
 
@@ -62,58 +65,62 @@ export default function App() {
         window.clearInterval(window.lastActivityIntervalId);
       } catch {}
     }
-    window.lastActivityIntervalId = window.setInterval(compareTimerToLastActivity, constants.FIVE_MINUTES_MS);
+    window.lastActivityIntervalId = window.setInterval(
+      compareTimerToLastActivity,
+      constants.FIVE_MINUTES_MS
+    );
     verifyAuthentication();
   }
 
   function compareTimerToLastActivity() {
     window.lastActivityCheckedAt = nowTime();
-    const lastActivity = localStorage.getItem('lastActivity');
+    const lastActivity = localStorage.getItem("lastActivity");
     if (!lastActivity) return;
-    if ((nowTime() - parseInt(lastActivity, 10)) > constants.TWENTY_MINUTES_MS)
-    {
-      signOut('You have been logged out due to inactivity. Please log back in to continue.');
+    if (nowTime() - parseInt(lastActivity, 10) > constants.TWENTY_MINUTES_MS) {
+      signOut(
+        "You have been logged out due to inactivity. Please log back in to continue."
+      );
     }
     verifyAuthentication();
   }
 
   function verifyAuthentication() {
     const sessionStartedAt = localStorage.getItem("sessionStartedAt");
-    if (!authToken 
-      || !sessionStartedAt
-      || (nowTime() - sessionStartedAt) < constants.TWENTY_MINUTES_MS) 
-    {
+    if (
+      !authToken ||
+      !sessionStartedAt ||
+      nowTime() - sessionStartedAt < constants.TWENTY_MINUTES_MS
+    ) {
       return; // not logged in or < 20 min since logon, no need to verify anything
     }
-    if ((nowTime() - sessionStartedAt) > constants.TWENTY_THREE_HOURS_MS)
-    {
+    if (nowTime() - sessionStartedAt > constants.TWENTY_THREE_HOURS_MS) {
       console.log("Session timeout");
-      signOut('Your session has timed out.  Please log in.');
+      signOut("Your session has timed out.  Please log in.");
     } else {
-      api.fetch("auth_check/" + nowTime()).then(r => {
-        if (!r.data.success)
-        {
-          signOut('Your session has timed out.  Please log in.');
-        }
-      }).catch(e => {
-        console.error("Failed auth check", e);
-        signOut('Your session has timed out.  Please log in.');
-      });
+      api
+        .fetch("auth_check/" + nowTime())
+        .then((r) => {
+          if (!r.data.success) {
+            signOut("Your session has timed out.  Please log in.");
+          }
+        })
+        .catch((e) => {
+          console.error("Failed auth check", e);
+          signOut("Your session has timed out.  Please log in.");
+        });
     }
   }
 
   function setLastActivity() {
-    if (!authToken || !localStorage.getItem('token')) {
+    if (!authToken || !localStorage.getItem("token")) {
       // not logged in, clean up and do nothing
-      if (localStorage.getItem('lastActivity')) 
-      {
-        localStorage.removeItem('lastActivity');
+      if (localStorage.getItem("lastActivity")) {
+        localStorage.removeItem("lastActivity");
       }
       return;
     }
-    localStorage.setItem('lastActivity', nowTime());
-    if (alertMessage) 
-    {
+    localStorage.setItem("lastActivity", nowTime());
+    if (alertMessage) {
       setAlertMessage(null);
     }
   }
@@ -154,7 +161,7 @@ export default function App() {
     setCurrentUser(user);
     setAuthToken(impersonateToken);
     setImpersonation(true);
-    window.location.pathname = '/home';
+    window.location.pathname = "/home";
   }
 
   function clearImpersonation() {
@@ -197,25 +204,27 @@ export default function App() {
 
   const AuthRoute = ({ component: Component, ...extraProps }) => {
     return (
-    <Route
-      {...extraProps}
-      render={(props) => {
-        const combinedProps = Object.assign(props, extraProps);
-        if (helpers.mustChangePassword(currentUser)) {
-          return <UpdatePassword {...extraProps} currentUser={currentUser} />;
-        }
-        if (!isAuthenticated()) {
-          return (<Redirect to="/" />); 
-        }
-        // if (!currentUser?.accepted_tnc) {
-        //   return (<TermsAndConditions {...combinedProps} />);
-        // }
-        return (
-          <Layout {...combinedProps} >
-            <Component {...combinedProps} />
-          </Layout>);
-      }}
-    />);
+      <Route
+        {...extraProps}
+        render={(props) => {
+          const combinedProps = Object.assign(props, extraProps);
+          if (helpers.mustChangePassword(currentUser)) {
+            return <UpdatePassword {...extraProps} currentUser={currentUser} />;
+          }
+          if (!isAuthenticated()) {
+            return <Redirect to="/" />;
+          }
+          // if (!currentUser?.accepted_tnc) {
+          //   return (<TermsAndConditions {...combinedProps} />);
+          // }
+          return (
+            <Layout {...combinedProps}>
+              <Component {...combinedProps} />
+            </Layout>
+          );
+        }}
+      />
+    );
   };
 
   const LoginRoute = ({ component: Component, ...extraProps }) => {
@@ -228,19 +237,24 @@ export default function App() {
             return <Redirect to="/home" />;
           }
           if (
-            (_.startsWith(combinedProps.path, '/reset_password') ||
-              _.startsWith(combinedProps.path, "/forgot_password")) &&
+            (_.startsWith(combinedProps.path, "/reset_password") ||
+              _.startsWith(combinedProps.path, "/forgot_password") ||
+              _.startsWith(combinedProps.path, "/login")) &&
             Component
           ) {
             return <Component {...combinedProps} />;
           }
-          return <SignIn {...combinedProps} />;
+          // return <SignIn {...combinedProps} />;
+          return <Home />;
         }}
       />
     );
   };
 
-  const referencePathList = _.map(constants.REFERENCE_DATA_URL_LIST, x => x.reactPath);
+  const referencePathList = _.map(
+    constants.REFERENCE_DATA_URL_LIST,
+    (x) => x.reactPath
+  );
   const showSidebar = userCtx && currentUser && currentUser.id;
 
   function addPhotoToUser(photo_url) {
@@ -258,7 +272,7 @@ export default function App() {
       window.authToken = token;
     }
     newUser = enhanceUser(newUser);
-    localStorage.setItem('lastUsername', newUser.username);
+    localStorage.setItem("lastUsername", newUser.username);
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     localStorage.setItem("lastActivity", nowTime());
     localStorage.setItem("sessionStartedAt", nowTime());
@@ -275,13 +289,13 @@ export default function App() {
     // toggleFullScreenDashboard: toggleFullScreenDashboard,
     signIn: signUserIn,
     signOut: signOut,
-    addPhotoToUser: addPhotoToUser
+    addPhotoToUser: addPhotoToUser,
   };
 
   // SOCKET FUNCTIONALITY
   useEffect(() => {
     if (authToken) {
-      joinOrCreateSocket()
+      joinOrCreateSocket();
     }
   }, [authToken]);
 
@@ -296,7 +310,7 @@ export default function App() {
             return;
           }
           channel.leave();
-        })
+        });
       } else {
         try {
           socket.disconnect();
@@ -322,12 +336,12 @@ export default function App() {
       process.env.NODE_ENV === "development" ? "ws" : "wss";
 
     const socket = new Socket(`${socket_protocol}://${socket_host}/socket`, {
-      params: { guardian_token: jwt }
+      params: { guardian_token: jwt },
     });
     socket.connect();
     setSocket(socket);
     return;
-  }
+  };
 
   function getChannel(topic) {
     if (!socket) {
@@ -344,44 +358,50 @@ export default function App() {
 
     const channel = getChannel(channelTopic);
     if (channel) {
-      channel.join()
-        .receive("ok", _resp => {
+      channel
+        .join()
+        .receive("ok", (_resp) => {
           return channel;
         })
-        .receive("error", _resp => {
+        .receive("error", (_resp) => {
           return null;
-        })
-  
+        });
+
       if (!Array.isArray(type)) {
-        channel.on(type, m => { callback(m) });
+        channel.on(type, (m) => {
+          callback(m);
+        });
       } else {
-        _.each(type, t => {
-          channel.on(t, m => { callback(m) });
-        })
+        _.each(type, (t) => {
+          channel.on(t, (m) => {
+            callback(m);
+          });
+        });
       }
       return channel;
     }
-  };
+  }
 
   function joinOrCreateChannel(channelTopic, callbackFunction, type) {
     const foundChannel = _.find(socket.channels, function (chnl) {
       return channelTopic === chnl.topic;
-    })
-    return socket && socket.channels && socket.channels.length > 0 && foundChannel ? foundChannel : createNewChannel(channelTopic, callbackFunction, type);
-  };
+    });
+    return socket &&
+      socket.channels &&
+      socket.channels.length > 0 &&
+      foundChannel
+      ? foundChannel
+      : createNewChannel(channelTopic, callbackFunction, type);
+  }
 
   function pushChannelBroadcast(channel, channelSubTopic, channelObject) {
     if (!channel.push) {
-      channel = joinOrCreateChannel(channel)
+      channel = joinOrCreateChannel(channel);
     }
     channel.push(channelSubTopic, channelObject);
-  };
+  }
 
-  function manageSocket(
-    channelTopic,
-    callback,
-    type
-  ) {
+  function manageSocket(channelTopic, callback, type) {
     if (!socket && currentUser) {
       joinOrCreateSocket();
     }
@@ -389,7 +409,7 @@ export default function App() {
     if (socket) {
       const channelToAdd = joinOrCreateChannel(channelTopic, callback, type);
       if (channelToAdd) {
-        socket.channels.push(channelToAdd)
+        socket.channels.push(channelToAdd);
       }
     }
   }
@@ -401,11 +421,11 @@ export default function App() {
     createNewChannel: createNewChannel,
     pushChannelBroadcast: pushChannelBroadcast,
     getChannel: getChannel,
-    manageSocket: manageSocket
+    manageSocket: manageSocket,
   };
 
   return (
-    <div className='siteContainer fullHeight'>
+    <div className="siteContainer fullHeight">
       <Alert
         effect="slide"
         position="top-right"
@@ -418,17 +438,26 @@ export default function App() {
       />
       <SocketContext.Provider value={socketInfo}>
         <UserContext.Provider value={user}>
-          <div className="contentWithHeader">
+          {/* I ADDED APP AS A CLASSNAME */}
+          <div className="contentWithHeader App">
             <Switch>
               <LoginRoute exact path="/" />
+              <LoginRoute path="/login" component={Login} />
               <LoginRoute path="/forgot_password" component={ForgotPassword} />
-              <LoginRoute path="/reset_password/:resetToken" component={ResetPassword} />
+              <LoginRoute
+                path="/reset_password/:resetToken"
+                component={ResetPassword}
+              />
               <AuthRoute exact path="/home" component={Dashboard} />
               <AuthRoute exact path="/admin" component={Admin} />
               <AuthRoute exact path="/profile" component={Profile} />
               <AuthRoute path="/user/:id" component={User} />
               <AuthRoute path="/users" component={Users} />
-              <AuthRoute exact path={referencePathList} component={ReferenceDataList} />
+              <AuthRoute
+                exact
+                path={referencePathList}
+                component={ReferenceDataList}
+              />
             </Switch>
           </div>
         </UserContext.Provider>
