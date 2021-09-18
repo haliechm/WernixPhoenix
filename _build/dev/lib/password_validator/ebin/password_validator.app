@@ -1,0 +1,10 @@
+{application,password_validator,
+             [{applications,[kernel,stdlib,elixir,logger,ecto]},
+              {description,"A library to validate passwords, with built-in validators for password\nlength as well as the character sets used. Custom validators can also be\ncreated.\n"},
+              {modules,['Elixir.PasswordValidator',
+                        'Elixir.PasswordValidator.Validator',
+                        'Elixir.PasswordValidator.Validators.CharacterSetValidator',
+                        'Elixir.PasswordValidator.Validators.CharacterSetValidator.Config',
+                        'Elixir.PasswordValidator.Validators.LengthValidator']},
+              {registered,[]},
+              {vsn,"0.4.1"}]}.

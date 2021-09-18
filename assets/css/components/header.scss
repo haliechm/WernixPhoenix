@@ -1,0 +1,78 @@
+#header{
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  margin-right: 0 !important;
+  font-size: 1.2em !important;
+
+  a {
+    color: $projectPrimaryBlue !important;
+    &:hover {
+      color: $projectPrimaryBlueDarker !important;
+    }
+    .nav-link {
+      color: $projectPrimaryBlue !important;
+      &:hover {
+        color: $projectPrimaryBlueDarker !important;
+      }
+    }
+  }
+
+  .mobileNav {
+    width: 85% !important;
+  }
+
+  .mobileHeaderSelect {
+    width: 40% !important;
+    color: black !important;
+  }
+
+  .mobileNavMenu {
+    width: 15%;
+    padding-right: 0px !important;
+  }
+
+  .mobileLogo {
+    width: 37%;
+    margin-left: -10px;
+  }
+  
+  .mobileLargeItem {
+    width: 7%;
+    padding-right: 0px !important;
+  }
+
+  @media (max-width: 720px) {
+
+    .mobileNavMenu {
+      width: 18%;
+      padding-right: 0px !important;
+    }
+
+    .mobileLogo {
+      width: 10%;
+    }
+    
+    .mobileLargeItem {
+      width: 10%;
+      padding-right: 0px !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .mobileNavMenu {
+      width: 18%;
+      padding-right: 0px !important;
+    }
+
+    .mobileLogo {
+      width: 15%;
+    }
+    
+    .mobileLargeItem {
+      width: 12%;
+      padding-right: 0px !important;
+    }
+  }
+}
+

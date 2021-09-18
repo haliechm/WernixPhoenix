@@ -1,0 +1,14 @@
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": [
+      [
+      "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  //   "exclude": [
+  //     /node_modules\/(css-loader|core-js|promise-polyfill|webpack|html-webpack-plugin|whatwg-fetch)\//
+  // ]
+}

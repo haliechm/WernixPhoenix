@@ -1,0 +1,109 @@
+$screen-dash-sm-min: 600px;
+
+/* Tablets and small desktops */
+$screen-md-min: 888px;
+
+/* custom medium size for dashboardPanel.scss */
+$screen-dash-md-min: 980px;
+
+/* Large tablets and desktops */
+$screen-lg-min: 1080px;
+
+/* XLarge desktops */
+$screen-xl-min: 1296px;
+
+/* Widescreen desktops */
+$screen-wd-min: 1500px;
+
+@mixin xs {
+  @media (min-width: #{$screen-dash-sm-min}) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+@mixin md-dash {
+  @media (min-width: #{$screen-dash-md-min}) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+@mixin wd {
+  @media (min-width: #{$screen-wd-min}) {
+    @content;
+  }
+}
+
+$projectPrimaryBlue: #0093D0;
+$projectPrimaryBlueDarker: #0c7eaf;
+$projectPrimaryBlueDarkest: #062780;
+$projectDarkBlue: #005295;
+$projectSuccessGreen: #047c24;
+$projectSuccessGreenText: #048c29;
+$projectSuccessGreenDarker: #03631c;
+$projectDangerRed: #9b1111;
+$projectDangerRedDark: #5d0a0a;
+$projectDangerRedDarker: #6c0b0b;
+$projectDangerRedDarkest: #4d0808;
+$projectWarningYellow: #e9b71b;
+$projectWarningYellowDark: #d1a418;
+$projectInfoTeal: #00BCE4;
+$projectInfoTealDark: #0787a3;
+$projectSecondaryGray: #6c757d;
+$projectSecondaryGrayDark: #4b5157;
+$projectYellow: #fff533;
+$projectYellowDark: #ffeb33;
+$projectGreen: #0fdb5e;
+$projectGreenDark: #09bd4f;
+$projectRed: #e62222;
+$projectRedDark: #d91c1c;
+
+$white: #ffffff;
+$black: rgba(0, 0, 0, 0.87);
+
+$primary: #1e9adf;
+$secondary: #ffc100;
+$navy: #002749;
+$magenta: #a51b70;
+$green: #12944a;
+$red: #c5253a;
+$warning: #ff9100;
+
+$body-color: rgba($navy, 0.7);
+$heading-color: $navy;
+
+$brand: $primary;
+$brand-active: darken($brand, 10);
+
+$topbar-mobile-width: 220px;
+
+$redFlagColor: #f44336;
+$magentaFlagColor: #e91e63;
+$purpleFlagColor: #9c27b0;
+$indigoFlagColor: #673ab7;
+$royalBlueFlagColor: #3f51b5;
+$blueFlagColor: #2196f3;
+$lightBlueFlagColor: #03a9f4;
+$aquaFlagColor: #00bcd4;
+$forestFlagColor: #009688;
+$greenFlagColor: #4caf50;
+$limeFlagColor: #8bc34a;
+$citronFlagColor: #cddc39;
+$yellowFlagColor: #ffeb3b;
+$sunFlagColor: #ffc107;
+$orangeFlagColor: #ff9800;
+$darkOrangeFlagColor: #ff5722;
+$brownFlagColor: #795548;
+$grayFlagColor: #607d8b;

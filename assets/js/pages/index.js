@@ -1,0 +1,12 @@
+export { default as Admin } from './Admin';
+export { default as Dashboard } from './Dashboard';
+export { default as ForgotPassword } from './ForgotPassword';
+export { default as Layout } from './Layout';
+export { default as NotFound } from './NotFound';
+export { default as Profile } from './Profile';
+export { default as ReferenceDataList } from "./ReferenceDataList";
+export { default as ResetPassword } from './ResetPassword';
+export { default as SignIn } from './SignIn';
+export { default as UpdatePassword } from './UpdatePassword';
+export { default as User } from './User';
+export { default as Users } from './Users';
