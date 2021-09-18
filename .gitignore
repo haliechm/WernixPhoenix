@@ -1,6 +1,5 @@
 # App artifacts
 /_build
-/db
 /deps
 /*.ez
 /.DS_Store
