@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
+  Alert,
   Container,
   Col,
   Row,
@@ -10,12 +11,14 @@ import {
   FormText,
   Button,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import classnames from "classnames";
 import _ from "lodash";
 import { slideOutRight } from "react-animations";
 import { data } from "../utils";
 import Radium, { StyleRoot } from "radium";
 import { TermsAndPrivacyModal } from "./";
+import { api, helpers } from "../utils";
 
 // used for words flying across main page (top and animation are randomly set for each word)
 const styles = {
@@ -30,6 +33,9 @@ export default function Login() {
   // state for controlling terms & privacy modals
   const [modalOpen, setModalOpen] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState(null);
 
   // controls beginning of the language words going across the screen
   function createFlyInAnimation() {
@@ -55,9 +61,47 @@ export default function Login() {
     );
   }
 
+  // used for changing username/password while typing
+  function handleUsername(e) {
+    setUserName(e.target.value);
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value);
+  }
+
+  // gets called when user hits submit button
+  function handleSubmit(e) {
+    console.log("e: ", e);
+    e.preventDefault();
+    api
+      .post("log_in", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        if (response.data.success) {
+          console.log("getting here");
+          setMessage({ flavor: "success", text: "Log-In Successful!" });
+          // userCtx.signIn(response.data.user, response.data.token);
+        } else {
+          console.log("actually, getting here");
+          setMessage({ flavor: "danger", text: response.data.message });
+        }
+      })
+      .catch(helpers.catchHandler);
+  }
+
   return (
     <StyleRoot>
-      {createFlyInAnimation()}
+      {message ? (
+        <Row className="mb-2">
+          <Col>
+            <Alert color={message.flavor}>{message.text}</Alert>
+          </Col>
+        </Row>
+      ) : null}
+      {/* {createFlyInAnimation()} */}
       {/* current users login form */}
       <Container
         // style={{ backgroundColor: "white" }}
@@ -71,7 +115,8 @@ export default function Login() {
         >
           <Col className="float-left ml-3">
             <Link to="/">
-              <i className="bi bi-x-lg float-left text-secondary up-front"></i>
+              <i className="fas fa-times float-left text-secondary up-front"></i>
+              {/* <i className="bi bi-x-lg float-left text-secondary up-front"></i> */}
             </Link>
           </Col>
         </Row>
@@ -82,7 +127,7 @@ export default function Login() {
             md={{ size: 4, offset: 4 }}
             className="no-padding"
           >
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <FormText>
                 <h2 className="up-front">Log In</h2>
               </FormText>
@@ -93,6 +138,8 @@ export default function Login() {
                     name="email"
                     id="user_email"
                     placeholder="email or username"
+                    value={username}
+                    onChange={handleUsername}
                   />
                 </Col>
               </FormGroup>
@@ -103,12 +150,17 @@ export default function Login() {
                     name="password"
                     id="user_password"
                     placeholder="password"
+                    value={password}
+                    onChange={handlePassword}
                   />
                 </Col>
               </FormGroup>
               <FormGroup row>
                 <Col>
-                  <Button className="main-page-button account-button ">
+                  <Button
+                    type="submit"
+                    className="main-page-button account-button "
+                  >
                     LOG IN
                   </Button>
                 </Col>

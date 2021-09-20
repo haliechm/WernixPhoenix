@@ -8,11 +8,14 @@ import { Socket } from "phoenix";
 import { api, constants, helpers, contexts } from "./utils";
 import {
   Admin,
+  Chat,
   Dashboard,
   Home, // I ADDED THIS
   Layout,
   Login, // I ADDED THIS
   Profile,
+  Register,
+  Settings,
   SignIn,
   User,
   Users,
@@ -20,6 +23,8 @@ import {
   ResetPassword,
   ForgotPassword,
   UpdatePassword,
+  UserProfile,
+  Video,
 } from "./pages";
 const { UserContext, SocketContext } = contexts;
 import "../css/app.scss";
@@ -234,12 +239,14 @@ export default function App() {
         render={(props) => {
           const combinedProps = Object.assign(props, extraProps);
           if (isAuthenticated()) {
-            return <Redirect to="/home" />;
+            // NEED TO DIRECT TO PARTICULAR USER HERE
+            return <Redirect to="/user_profile" />;
           }
           if (
             (_.startsWith(combinedProps.path, "/reset_password") ||
               _.startsWith(combinedProps.path, "/forgot_password") ||
-              _.startsWith(combinedProps.path, "/login")) &&
+              _.startsWith(combinedProps.path, "/login") ||
+              _.startsWith(combinedProps.path, "/register")) &&
             Component
           ) {
             return <Component {...combinedProps} />;
@@ -442,12 +449,19 @@ export default function App() {
           <div className="contentWithHeader App">
             <Switch>
               <LoginRoute exact path="/" />
-              <LoginRoute path="/login" component={Login} />
+              <LoginRoute path="/login" component={SignIn} />
               <LoginRoute path="/forgot_password" component={ForgotPassword} />
+              <LoginRoute path="/register" component={Register} />
               <LoginRoute
                 path="/reset_password/:resetToken"
                 component={ResetPassword}
               />
+              {/* ADDING THESE BUT MUST TURN INTO AUTHROUTES LATER */}
+              <Route exact path="/user_profile" component={UserProfile} />
+              <Route exact path="/settings" component={Settings} />
+              <Route exact path="/video" component={Video} />
+              <Route exact path="/chat" component={Chat} />
+
               <AuthRoute exact path="/home" component={Dashboard} />
               <AuthRoute exact path="/admin" component={Admin} />
               <AuthRoute exact path="/profile" component={Profile} />

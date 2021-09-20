@@ -31,11 +31,14 @@ defmodule E2QuizzicalWeb.PublicController do
   end
 
   def log_in(conn, params = %{"username" => username, "password" => pwd}) do
+ 
     ip = conn.remote_ip 
       |> :inet.ntoa() 
       |> to_string()
     is_dev = Application.get_env(:e2quizzical, :environment) == :dev
+
     dev_user_id = Application.get_env(:e2quizzical, :dev_user_id)
+  
     provided_two_factor_code = Map.get(params, "two_factor_code")
 
     if is_dev && !is_nil(dev_user_id) do

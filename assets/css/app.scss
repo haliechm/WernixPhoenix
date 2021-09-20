@@ -1,5 +1,6 @@
 @import "variables.scss";
 @import "components/header.scss";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
 body,
 html,
@@ -988,8 +989,6 @@ $one9th: calc(100% / 9);
 
 // I STARTED ADDING BELOW
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
-
 body {
   font-family: "Raleway", sans-serif !important;
   overflow-x: hidden !important;
@@ -1044,8 +1043,7 @@ body {
   width: 110%;
   /* top: 10%; */
   left: -100px;
-  /* opacity: 11%; */
-  opacity: 25%;
+  opacity: 17%;
   font-size: 1.2rem;
   text-align: left;
   z-index: 1;
@@ -1172,11 +1170,24 @@ ul a:hover {
   margin-bottom: 14px;
 }
 
-.bi-eye-css {
+// .bi-eye-css {
+//   position: absolute;
+//   top: 12%;
+//   right: 3%;
+// }
+
+.eyeball {
   position: absolute;
-  top: 12%;
-  right: 3%;
+  top: 21%;
+  right: 4%;
 }
+
+// .bi-eye-fill-css {
+//   background: url("../static/images/eye-fill.png") no-repeat left top;
+//   height: 20px;
+//   padding-left: 40px;
+//   padding-top: 4px;
+// }
 
 .MuiSlider-markLabel {
   font-size: 0.5rem !important;
@@ -1210,7 +1221,7 @@ ul a:hover {
 }
 
 .profile-row {
-  margin: 0% 3% 4% 3% !important;
+  margin: 2% 4% 4% 4% !important;
   /* margin-left: 8% !important;
   margin-right: 8% !important;
   margin-bottom: 4%; */
