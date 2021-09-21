@@ -323,6 +323,7 @@ export default function App() {
 
   const user = {
     currentUser: currentUser,
+    // changeCurrentUser: setCurrentUser, // I added this
     impersonating: impersonating,
     impersonate: impersonate,
     clearImpersonation: clearImpersonation,

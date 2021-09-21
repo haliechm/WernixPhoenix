@@ -21,13 +21,13 @@ export default function PopUpModal(props) {
       <ModalFooter>
         <Button
           style={{ backgroundColor: "#476b55" }}
-          onClick={() => props.setPopUpModalOpen(false)}
+          onClick={() => {props.setSaveChanges(true); props.setPopUpModalOpen(false)}}
         >
           {props.action}
         </Button>
         <Button
           color="secondary"
-          onClick={() => props.setPopUpModalOpen(false)}
+          onClick={() => {props.setSaveChanges(false); props.setPopUpModalOpen(false)}}
         >
           Cancel
         </Button>

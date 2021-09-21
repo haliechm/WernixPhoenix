@@ -40,6 +40,8 @@ defmodule E2Quizzical.User do
     reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
     failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa)a
 
+  # not entirely clear how this is working - but it is changing the User table?
+  # NEED TO UNDERSTAND THIS
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @available_fields, empty_values: [])

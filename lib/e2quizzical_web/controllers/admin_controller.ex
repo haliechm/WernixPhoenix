@@ -96,7 +96,8 @@ defmodule E2QuizzicalWeb.AdminController do
       "first_name" => first_name,
       "last_name" => last_name,
       "email" => email,
-      "mobile_number" => mobile_number
+      "mobile_number" => mobile_number,
+      "username" => username
     }) do
     change_params = %{
       "id" => existing_user_id,
@@ -104,7 +105,8 @@ defmodule E2QuizzicalWeb.AdminController do
       "middle_name" => Map.get(raw_params, "middle_name", ""),
       "last_name" => last_name,
       "email" => email,
-      "mobile_number" => mobile_number
+      "mobile_number" => mobile_number,
+      "username" => username
     }
     # just doing in case image was uploaded
     change_params = 

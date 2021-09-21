@@ -88,7 +88,9 @@ export default function EditLanguage(props) {
           xs={{ size: 10, offset: 0 }}
         >
           <div className="edit-field">
-            <Label>My skill level in {learningLanguage}:</Label>
+            <Label>
+              My skill level in <b>{learningLanguage}</b>:
+            </Label>
             <Form>
               <FormGroup check inline>
                 <Label check>
@@ -160,7 +162,7 @@ export default function EditLanguage(props) {
           </div>
         </Col>
       </Row>
-      <Row>
+      {/* <Row>
         <Col
           className="register-form-label"
           md={{ size: 8, offset: 0 }}
@@ -241,7 +243,7 @@ export default function EditLanguage(props) {
             </Form>
           </div>
         </Col>
-      </Row>
+      </Row> */}
       <Row>
         <Col
           className="register-form-label"
