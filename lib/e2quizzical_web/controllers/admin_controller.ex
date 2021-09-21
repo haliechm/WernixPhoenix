@@ -46,6 +46,7 @@ defmodule E2QuizzicalWeb.AdminController do
     end
   end
 
+  # i guess here params is a map that directly gets the parameters from the url
   def get_user(conn, %{"user_id" => user_id}) do
   	json(conn, User.get_one(user_id))
   end

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Label, Input, Form, Button, FormGroup } from "reactstrap";
 import { PopUpModal } from "./";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function EditLanguage(props) {
+  const userCtx = useContext(UserContext);
   // CHANGE THIS TO BE DEFAULTED BASED ON WHOEVER IS LOGGED ON
   const [learningLanguage, setLearningLanguage] = useState("Russian");
   const [nativeLanguage, setNativeLanguage] = useState("English");

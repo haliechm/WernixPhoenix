@@ -2,16 +2,55 @@ import React, { useState, useEffect, useContext, Fragment } from "react";
 import { NavBarSignedIn, UserProfileTop, Friends, UserModal, Footer } from "./";
 import { Container, Row, Col } from "reactstrap";
 import { chat_history } from "../../images";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
+
+const defaultNewUser = {
+  id: 0,
+  // roles: [],
+};
 
 export default function UserProfile(props) {
-  const [usernameChosen, setUsernameChosen] = useState("");
-  const [userModalOpen, setUserModalOpen] = useState(false);
+  const userCtx = useContext(UserContext);
+  // const [user, setUser] = useState(defaultNewUser);
+  const [usernameChosen, setUsernameChosen] = useState(""); // username of friends
+  const [userModalOpen, setUserModalOpen] = useState(false); // friends modal (userModal)
+
+  // const routeUserId = props?.computedMatch?.params?.id
+  //   ? parseInt(props.computedMatch.params.id, 10)
+  //   : null;
+  // const isNewUser = !routeUserId;
+  // const currentUser = userCtx?.currentUser ? userCtx.currentUser : null;
 
   // useEffect(() => {
   //   setUserModalOpen(!userModalOpen);
   //   console.log(`new username: ${usernameChosen}`)
   //   console.log(`value of userModal: ${userModalOpen}`)
   // }, [usernameChosen])
+
+  // useEffect(() => {
+  //   // console.log("THE USER CONTEXT!!!!!!!!!!!!!!!!!!!!!!!!!!!", userCtx);
+  //   // console.log("CURRENT USER OF CONTEXT!!!!!!!!!!", userCtx.currentUser);
+  //   if (routeUserId) {
+  //     api
+  //       // fetch is getting user from table in response
+  //       .fetch(`admin/user/${routeUserId}`)
+  //       .then((response) => {
+  //         if (response.data) {
+  //           let existingUser = response.data;
+
+  //           setUser(existingUser);
+  //           // now user is entire record from User table
+  //         }
+  //       })
+  //       .catch((error) =>
+  //         setMessage({
+  //           flavor: "danger",
+  //           text: "There was an error loading user data",
+  //         })
+  //       );
+  //   }
+  // }, []);
 
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { PopUpModal } from "./";
 import {
@@ -16,8 +16,11 @@ import {
   DropdownMenu,
   Collapse,
 } from "reactstrap";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function NavBarMain(props) {
+  const userCtx = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [popUpModalOpen, setPopUpModalOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
@@ -55,7 +58,7 @@ export default function NavBarMain(props) {
 
         <UncontrolledDropdown>
           <DropdownToggle nav caret style={{ color: "white" }}>
-            HALIECHM
+            {userCtx.currentUser?.username}
           </DropdownToggle>
           <DropdownMenu right>
             <Link to="user_profile" className="no-text-decoration">

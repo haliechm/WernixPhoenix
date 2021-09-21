@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Row,
   Col,
@@ -11,8 +11,11 @@ import {
   InputGroupText,
 } from "reactstrap";
 import { PopUpModal } from "./";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function EditProfile(props) {
+  const userCtx = useContext(UserContext);
   const [popUpModalOpen, setPopUpModalOpen] = useState(false);
   return (
     <Form>
@@ -34,7 +37,11 @@ export default function EditProfile(props) {
               name="firstName"
               id="user_first_name"
               // LATER CHANGE THE PLACEHOLDER TO BE THE REAL USERS FIRST NAME
-              placeholder="your first name"
+              placeholder={
+                userCtx.currentUser
+                  ? userCtx.currentUser.first_name
+                  : "your first name"
+              }
               bsSize="sm"
             />
           </div>
@@ -53,7 +60,11 @@ export default function EditProfile(props) {
               name="lastName"
               id="user_last_name"
               // LATER CHANGE THE PLACEHOLDER TO BE THE REAL USERS FIRST NAME
-              placeholder="your last name"
+              placeholder={
+                userCtx.currentUser
+                  ? userCtx.currentUser.last_name
+                  : "your last name"
+              }
               bsSize="sm"
             />
           </div>
@@ -75,7 +86,11 @@ export default function EditProfile(props) {
                 type="text"
                 name="username"
                 id="user_username"
-                placeholder="your username"
+                placeholder={
+                  userCtx.currentUser
+                    ? userCtx.currentUser.username
+                    : "your username"
+                }
                 bsSize="sm"
               />
             </InputGroup>
@@ -95,7 +110,9 @@ export default function EditProfile(props) {
               name="email"
               id="user_email"
               // LATER CHANGE THE PLACEHOLDER TO BE THE REAL USERS FIRST NAME
-              placeholder="your email"
+              placeholder={
+                userCtx.currentUser ? userCtx.currentUser.email : "your email"
+              }
               bsSize="sm"
             />
           </div>

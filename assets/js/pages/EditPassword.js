@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Label, Input, Form, Button } from "reactstrap";
 import { PopUpModal } from "./";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function EditPassword(props) {
+  const userCtx = useContext(UserContext);
   const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
   const [reenterPasswordShown, setReenterPasswordShown] = useState(false);

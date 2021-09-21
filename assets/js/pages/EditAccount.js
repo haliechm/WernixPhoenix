@@ -1,9 +1,12 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Form, Button, Label, Input } from "reactstrap";
 import { PopUpModal } from "./";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function EditAccount(props) {
+  const userCtx = useContext(UserContext);
   const [popUpModalOpen, setPopUpModalOpen] = useState(false);
   const [action, setAction] = useState("");
 

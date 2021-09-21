@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import {
   NavBarSignedIn,
   UserProfileTop,
@@ -10,8 +10,11 @@ import {
   Footer,
 } from "./";
 import { Container, Row, Col } from "reactstrap";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function Settings(props) {
+  const userCtx = useContext(UserContext);
   const [chosenToEdit, setChosenToEdit] = useState("PROFILE");
   return (
     <Fragment>

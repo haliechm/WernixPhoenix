@@ -64,6 +64,12 @@ export default function App() {
     compareTimerToLastActivity();
   }, []);
 
+  // does this useEffect() really do anything?
+  // useEffect(() => {
+  //   console.log("GETTING HERE YAYYYYYYYYYYYYYYYYY");
+  //   setCurrentUser(userCtx.currentUser);
+  // }, [userCtx.currentUser]);
+
   function startTimer() {
     if (window.lastActivityIntervalId) {
       try {
@@ -261,7 +267,11 @@ export default function App() {
           const combinedProps = Object.assign(props, extraProps);
           if (isAuthenticated()) {
             // NEED TO DIRECT TO PARTICULAR USER HERE -> this is what happens after logged in successfully
-            return <Redirect to="/user_profile" />;
+            // WHY ARE THESE NOT BEING SET?????????????
+            console.log("cntx!!!!!!!!!!!", userCtx);
+            console.log("current user!!!!!!!!!!!!!!!!!!", currentUser);
+            // return <Redirect to={`/user_profile/${currentUser?.first_name}`} />;
+            return <Redirect to={`/user_profile`} />;
           }
           if (
             (_.startsWith(combinedProps.path, "/reset_password") ||
@@ -484,7 +494,7 @@ export default function App() {
               <AuthorizedRoute
                 exact
                 // path contains primary key (id) of user in question
-                path="/user_profile/:id"
+                path="/user_profile"
                 component={UserProfile}
               />
               <AuthorizedRoute exact path="/settings" component={Settings} />

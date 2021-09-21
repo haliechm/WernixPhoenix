@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 export default function UserProfileTop(props) {
+  const userCtx = useContext(UserContext);
   return (
     <Container id="profile-top" className="no-padding mb-0 pb-0" fluid>
       <Row id="profile-page-background" className="profile-row">
@@ -24,8 +27,8 @@ export default function UserProfileTop(props) {
           xs={{ size: 8, offset: 2 }}
           className="no-padding large-text-align-left"
         >
-          <h3>Halie</h3>
-          <h6>@haliechm</h6>
+          <h3>{userCtx.currentUser?.first_name || "NO FIRST NAME"}</h3>
+          <h6>@{userCtx.currentUser?.username || "NO USERNAME"}</h6>
           <h6>22 Friends</h6>
           <h6>Joined on 08/03/2021</h6>
           <h6>
