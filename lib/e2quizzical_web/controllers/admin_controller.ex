@@ -90,6 +90,7 @@ defmodule E2QuizzicalWeb.AdminController do
     end
   end
 
+  # pattern matching here, middle_name not required but might need to access it so that's why we use "raw_params ="
   def save_profile(conn, raw_params = %{"id" => existing_user_id,
       "first_name" => first_name,
       "last_name" => last_name,
@@ -104,6 +105,7 @@ defmodule E2QuizzicalWeb.AdminController do
       "email" => email,
       "mobile_number" => mobile_number
     }
+    # just doing in case image was uploaded
     change_params = 
       raw_params
       |> Map.get("image_url")

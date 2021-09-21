@@ -32,7 +32,7 @@ export default function UserModal(props) {
       >
         <ModalHeader toggle={toggle}>
           {/* CHANGE THIS BASED IF THEY ARE ONLINE OR OFFLINE */}
-          <i className="far fa-dot-circle online mr-2"></i>
+          <i class="fas fa-circle online mr-2"></i>
           <b>{props.usernameChosen}</b>
         </ModalHeader>
         <ModalBody className="modal-body">

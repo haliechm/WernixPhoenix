@@ -18,48 +18,59 @@ import { slideOutRight } from "react-animations";
 import { data } from "../utils";
 import Radium, { StyleRoot } from "radium";
 import { TermsAndPrivacyModal } from "./";
-import { api, helpers } from "../utils";
+import { api, helpers, contexts } from "../utils";
+const { UserContext } = contexts;
+import Logo from "../../images/logo.png";
 
 // used for words flying across main page (top and animation are randomly set for each word)
-const styles = {
-  slideOutRight: {
-    animation: "x 18s linear infinite",
-    animationName: Radium.keyframes(slideOutRight, "slideOutRight"),
-    top: 0,
-  },
-};
+// const styles = {
+//   slideOutRight: {
+//     animation: "x 18s linear infinite",
+//     animationName: Radium.keyframes(slideOutRight, "slideOutRight"),
+//     top: 0,
+//   },
+// };
 
 export default function Login() {
   // state for controlling terms & privacy modals
+  const userCtx = useContext(UserContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
-  const [username, setUserName] = useState("");
+  const [username, setUserName] = useState(
+    localStorage.getItem("lastUsername") || ""
+  );
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [redirectTo, setRedirectTo] = useState(null);
+
+  // useEffect(() => {
+  //   console.log("----------------------------------user context changed!!");
+  //   console.log("user context: ", UserContext);
+  // }, [userCtx]);
 
   // controls beginning of the language words going across the screen
-  function createFlyInAnimation() {
-    let wordsToReturn = _.map(data.languageTranslationsArray, (word) =>
-      createLanguageWordFlyIn(word)
-    );
-    return wordsToReturn;
-  }
+  // function createFlyInAnimation() {
+  //   let wordsToReturn = _.map(data.languageTranslationsArray, (word) =>
+  //     createLanguageWordFlyIn(word)
+  //   );
+  //   return wordsToReturn;
+  // }
 
   // creates each individual langauge word and randomly sets height and speed
-  function createLanguageWordFlyIn(word) {
-    styles.slideOutRight.top = `${_.random(1, 90)}%`;
-    styles.slideOutRight.animation = `x ${_.random(8, 25)}s linear infinite`;
+  // function createLanguageWordFlyIn(word) {
+  //   styles.slideOutRight.top = `${_.random(1, 90)}%`;
+  //   styles.slideOutRight.animation = `x ${_.random(8, 25)}s linear infinite`;
 
-    return (
-      <p
-        style={{ ...styles.slideOutRight }}
-        className="language-word-fly-in"
-        key={`${word}-${_.random(0, 1000)}`}
-      >
-        {word}
-      </p>
-    );
-  }
+  //   return (
+  //     <p
+  //       style={{ ...styles.slideOutRight }}
+  //       className="language-word-fly-in"
+  //       key={`${word}-${_.random(0, 1000)}`}
+  //     >
+  //       {word}
+  //     </p>
+  //   );
+  // }
 
   // used for changing username/password while typing
   function handleUsername(e) {
@@ -72,7 +83,6 @@ export default function Login() {
 
   // gets called when user hits submit button
   function handleSubmit(e) {
-    console.log("e: ", e);
     e.preventDefault();
     api
       .post("log_in", {
@@ -82,8 +92,22 @@ export default function Login() {
       .then((response) => {
         if (response.data.success) {
           console.log("getting here");
+          // LOOKS LIKE currentUser OF USERCONTEXT IS NOT BEING SET HERE
+          console.log("------ SIGNING IN: ", userCtx);
           setMessage({ flavor: "success", text: "Log-In Successful!" });
-          // userCtx.signIn(response.data.user, response.data.token);
+          // is this where user context is getting set to be the current user?
+          // how is it working?
+          // like so it has the signIn function that takes is the response parameters, but where did signIn get set?
+          // dev tools seems to show it is a function called signUserIn, but where is that coming from?
+          // signUserIn coming from app.js
+          // when and how is userCtx.signIn getting set to be the signUserIn function from app.js?
+          // const user in app.js seems to set signIn to be signUserIn
+          // usercontext being automatically set value of const user in app.js on line 468
+          // what is response.data.user?
+          // user.userinfo should contain all data of user row from table (it does)
+          console.log("------ response.data.user: ", response.data.user);
+          userCtx.signIn(response.data.user, response.data.token);
+          console.log("------ SIGNED IN (2): ", userCtx);
         } else {
           console.log("actually, getting here");
           setMessage({ flavor: "danger", text: response.data.message });
@@ -134,7 +158,7 @@ export default function Login() {
               <FormGroup row>
                 <Col className="up-front">
                   <Input
-                    type="email"
+                    type="text"
                     name="email"
                     id="user_email"
                     placeholder="email or username"

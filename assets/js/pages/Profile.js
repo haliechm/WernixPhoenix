@@ -33,6 +33,7 @@ export default function Profile(props) {
   const [activeTab, setActiveTab] = useState("DETAILS");
   const [profilePicture, setProfilePicture] = useState(null);
 
+  // does this useEffect() really do anything?
   useEffect(() => {
     setUser(userCtx.currentUser);
   }, [userCtx.currentUser]);

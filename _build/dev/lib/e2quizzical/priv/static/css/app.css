@@ -14196,9 +14196,11 @@ ul a:hover {
   color: #8ad1a6; }
 
 .online {
+  font-size: 0.5rem;
   color: #8ad1a6; }
 
 .offline {
+  font-size: 0.5rem;
   color: gray; }
 
 .edit-field {

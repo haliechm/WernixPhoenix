@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { NavBarSignedIn, UserProfileTop, Friends, UserModal, Footer } from "./";
 import { Container, Row, Col } from "reactstrap";
 import { chat_history } from "../../images";

@@ -232,6 +232,27 @@ export default function App() {
     );
   };
 
+  const AuthorizedRoute = ({ component: Component, ...extraProps }) => {
+    return (
+      <Route
+        {...extraProps}
+        render={(props) => {
+          const combinedProps = Object.assign(props, extraProps);
+          if (helpers.mustChangePassword(currentUser)) {
+            return <UpdatePassword {...extraProps} currentUser={currentUser} />;
+          }
+          if (!isAuthenticated()) {
+            return <Redirect to="/login" />;
+          }
+          // if (!currentUser?.accepted_tnc) {
+          //   return (<TermsAndConditions {...combinedProps} />);
+          // }
+          return <Component {...combinedProps} />;
+        }}
+      />
+    );
+  };
+
   const LoginRoute = ({ component: Component, ...extraProps }) => {
     return (
       <Route
@@ -239,7 +260,7 @@ export default function App() {
         render={(props) => {
           const combinedProps = Object.assign(props, extraProps);
           if (isAuthenticated()) {
-            // NEED TO DIRECT TO PARTICULAR USER HERE
+            // NEED TO DIRECT TO PARTICULAR USER HERE -> this is what happens after logged in successfully
             return <Redirect to="/user_profile" />;
           }
           if (
@@ -279,10 +300,13 @@ export default function App() {
       window.authToken = token;
     }
     newUser = enhanceUser(newUser);
+    // THIS IS WHERE THE LOCAL STORAGE STUFF IS BEING SET
     localStorage.setItem("lastUsername", newUser.username);
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     localStorage.setItem("lastActivity", nowTime());
     localStorage.setItem("sessionStartedAt", nowTime());
+    // okay following now, but how is setting currentUser changing the context so it is all available in other pages?
+    // i think because of const user currentUser: currentUser, so when currentUser is changed all of the context is changed because UseContext was set to value of user
     setCurrentUser(newUser);
     setAlertMessage(null);
   }
@@ -449,18 +473,23 @@ export default function App() {
           <div className="contentWithHeader App">
             <Switch>
               <LoginRoute exact path="/" />
-              <LoginRoute path="/login" component={SignIn} />
+              <LoginRoute path="/login" component={Login} />
               <LoginRoute path="/forgot_password" component={ForgotPassword} />
               <LoginRoute path="/register" component={Register} />
               <LoginRoute
                 path="/reset_password/:resetToken"
                 component={ResetPassword}
               />
-              {/* ADDING THESE BUT MUST TURN INTO AUTHROUTES LATER */}
-              <Route exact path="/user_profile" component={UserProfile} />
-              <Route exact path="/settings" component={Settings} />
-              <Route exact path="/video" component={Video} />
-              <Route exact path="/chat" component={Chat} />
+
+              <AuthorizedRoute
+                exact
+                // path contains primary key (id) of user in question
+                path="/user_profile/:id"
+                component={UserProfile}
+              />
+              <AuthorizedRoute exact path="/settings" component={Settings} />
+              <AuthorizedRoute exact path="/video" component={Video} />
+              <AuthorizedRoute exact path="/chat" component={Chat} />
 
               <AuthRoute exact path="/home" component={Dashboard} />
               <AuthRoute exact path="/admin" component={Admin} />
