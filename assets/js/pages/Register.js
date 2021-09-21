@@ -142,7 +142,7 @@ export default function Register(props) {
                 <h2 className="up-front">Register</h2>
               </FormText>
               <FormGroup row>
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
                   <Label>First Name</Label>
                   <Input
                     type="text"
@@ -153,7 +153,7 @@ export default function Register(props) {
                   />
                 </Col>
 
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
                   <Label>Last Name</Label>
                   <Input
                     type="text"
@@ -163,7 +163,7 @@ export default function Register(props) {
                     bsSize="sm"
                   />
                 </Col>
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
                   <Label>Username</Label>
                   {/* <Input
                     type="text"
@@ -188,7 +188,7 @@ export default function Register(props) {
               </FormGroup>
               {/* NEW NEW START */}
               <FormGroup row>
-                <Col className="up-front register-form-label" md={6} xs={12}>
+                <Col className="up-front register-form-label" lg={6} xs={12}>
                   <Label>Email</Label>
                   <Input
                     type="email"
@@ -199,7 +199,7 @@ export default function Register(props) {
                   />
                 </Col>
 
-                <Col className="up-front register-form-label" md={3} xs={12}>
+                <Col className="up-front register-form-label" lg={3} xs={12}>
                   <Label>Password</Label>
                   <div className="pass-wrapper">
                     <Input
@@ -219,7 +219,7 @@ export default function Register(props) {
                     ></i>
                   </div>
                 </Col>
-                <Col className="up-front register-form-label" md={3} xs={12}>
+                <Col className="up-front register-form-label" lg={3} xs={12}>
                   <Label>Re-Enter Password</Label>
                   <div className="pass-wrapper">
                     <Input
@@ -255,7 +255,7 @@ export default function Register(props) {
               {/* NEW NEW END */}
               {/* NEW START */}
               <FormGroup row>
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
                   <Label for="exampleSelect">Native Language</Label>
                   <Input
                     type="select"
@@ -276,7 +276,7 @@ export default function Register(props) {
                     <option>Swahili</option>
                   </Input>
                 </Col>
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
                   <Label for="exampleSelect">I want to pratice</Label>
                   <Input
                     type="select"
@@ -297,7 +297,21 @@ export default function Register(props) {
                     <option>Russian</option>
                   </Input>
                 </Col>
-                <Col className="up-front register-form-label" md={4} xs={12}>
+                <Col className="up-front register-form-label" lg={4} xs={12}>
+                  <Label>Birthdate</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="user_email"
+                    placeholder="MM/DD/YYYY"
+                    bsSize="sm"
+                  />
+                </Col>
+              </FormGroup>
+              {/* NEW END */}
+              {/* START */}
+              <FormGroup row>
+                <Col className="up-front register-form-label" lg={8} xs={12}>
                   <Label for="skill-slider" id="slider-label">
                     My skill level in <b>{wantToLearnLanguage}</b>:
                   </Label>
@@ -315,22 +329,8 @@ export default function Register(props) {
                     style={{ color: "#8ad1a6" }}
                   />
                 </Col>
-              </FormGroup>
-              {/* NEW END */}
-              {/* START */}
-              <FormGroup row>
-                <Col className="up-front register-form-label" md={3} xs={12}>
-                  <Label>Birthdate</Label>
-                  <Input
-                    type="email"
-                    name="email"
-                    id="user_email"
-                    placeholder="MM/DD/YYYY"
-                    bsSize="sm"
-                  />
-                </Col>
 
-                <Col className="up-front register-form-label" md={9} xs={12}>
+                {/* <Col className="up-front register-form-label" lg={9} xs={12}>
                   <Label>
                     I prefer to be matched with people that are{" "}
                     <b>{othersSkillLevel}</b> in {nativeLanguage}{" "}
@@ -403,12 +403,12 @@ export default function Register(props) {
                       </Label>
                     </FormGroup>
                   </Form>
-                </Col>
+                </Col> */}
               </FormGroup>
 
               {/* END */}
               <FormGroup row>
-                <Col md={{ size: 4, offset: 4 }}>
+                <Col lg={{ size: 4, offset: 4 }}>
                   <Button className="main-page-button account-button ">
                     SIGN UP
                   </Button>
@@ -451,7 +451,7 @@ export default function Register(props) {
               </FormText>
 
               <FormGroup row>
-                <Col md={{ size: 4, offset: 4 }}>
+                <Col lg={{ size: 4, offset: 4 }}>
                   <Link to="login">
                     <Button className="main-page-button sign-up-button mt-2 up-front">
                       LOG IN
