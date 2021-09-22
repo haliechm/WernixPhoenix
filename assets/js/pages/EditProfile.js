@@ -137,7 +137,7 @@ export default function EditProfile(props) {
                 onChange(event.target.name, event.target.value)
               }
               bsSize="sm"
-              value={user.first_name || ""}
+              value={user?.first_name || ""}
             />
           </div>
         </Col>
@@ -163,7 +163,7 @@ export default function EditProfile(props) {
               onChange={(event) =>
                 onChange(event.target.name, event.target.value)
               }
-              value={user.last_name || ""}
+              value={user?.last_name || ""}
               bsSize="sm"
             />
           </div>
@@ -193,7 +193,7 @@ export default function EditProfile(props) {
                 onChange={(event) =>
                   onChange(event.target.name, event.target.value)
                 }
-                value={user.username || ""}
+                value={user?.username || ""}
                 bsSize="sm"
               />
             </InputGroup>
@@ -219,7 +219,7 @@ export default function EditProfile(props) {
               onChange={(event) =>
                 onChange(event.target.name, event.target.value)
               }
-              value={user.email || ""}
+              value={user?.email || ""}
               bsSize="sm"
             />
           </div>

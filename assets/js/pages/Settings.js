@@ -18,7 +18,7 @@ export default function Settings(props) {
   const [chosenToEdit, setChosenToEdit] = useState("PROFILE");
   return (
     <Fragment>
-      <NavBarSignedIn />
+      <NavBarSignedIn setRedirectTo={props.setRedirectTo} />
       <UserProfileTop />
       <Container className="no-padding mb-0 pb-0 profile-top" fluid>
         <Row>

@@ -2,5 +2,5 @@ import React from "react";
 import { NavBarSignedIn } from ".";
 
 export default function Chat(props) {
-  return <NavBarSignedIn />;
+  return <NavBarSignedIn setRedirectTo={props.setRedirectTo} />;
 }

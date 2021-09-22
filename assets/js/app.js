@@ -258,6 +258,7 @@ export default function App() {
             // but if we just logged out I want to redirect to home :(
             // how can i eat my cake and have it too?
             // there must be a way
+            // figured it out (using redirect state)
           }
           // if (!currentUser?.accepted_tnc) {
           //   return (<TermsAndConditions {...combinedProps} />);
@@ -508,9 +509,24 @@ export default function App() {
                 component={UserProfile}
                 setRedirectTo={setRedirectTo}
               />
-              <AuthorizedRoute exact path="/settings" component={Settings} />
-              <AuthorizedRoute exact path="/video" component={Video} />
-              <AuthorizedRoute exact path="/chat" component={Chat} />
+              <AuthorizedRoute
+                exact
+                path="/settings"
+                component={Settings}
+                setRedirectTo={setRedirectTo}
+              />
+              <AuthorizedRoute
+                exact
+                path="/video"
+                component={Video}
+                setRedirectTo={setRedirectTo}
+              />
+              <AuthorizedRoute
+                exact
+                path="/chat"
+                component={Chat}
+                setRedirectTo={setRedirectTo}
+              />
 
               <AuthRoute exact path="/home" component={Dashboard} />
               <AuthRoute exact path="/admin" component={Admin} />
