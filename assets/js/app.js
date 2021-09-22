@@ -32,7 +32,7 @@ import "../css/app.scss";
 const nowTime = () => new Date().getTime();
 window.lastActivityCheckedAt = nowTime();
 
-const CHANNEL_MAX_AGE = 60 * 60000 * 1; // MELISSA might need to set this differently
+const CHANNEL_MAX_AGE = 60 * 60000 * 1; // might set this differently
 // for app that runs 24/7
 
 export default function App() {
@@ -52,6 +52,7 @@ export default function App() {
   const [impersonating, setImpersonation] = useState(isImpersonating);
   const [alertMessage, setAlertMessage] = useState(null);
   const [signInMessageVisible, setSignInMessageVisible] = useState(false);
+  const [redirectTo, setRedirectTo] = useState("/login");
 
   // socket / channel items
   const [socket, setSocket] = useState(null);
@@ -211,6 +212,10 @@ export default function App() {
     if (impersonating) {
       clearImpersonation();
     }
+
+    // MAYBE NEED TO REDIRECT TO HOME PAGE????
+    // <Redirect to={`/`} />;
+    // return <Redirect to={`/user_profile`} />;
   }
 
   const AuthRoute = ({ component: Component, ...extraProps }) => {
@@ -248,7 +253,11 @@ export default function App() {
             return <UpdatePassword {...extraProps} currentUser={currentUser} />;
           }
           if (!isAuthenticated()) {
-            return <Redirect to="/login" />;
+            // return <Redirect to="/" />;
+            return <Redirect to={redirectTo} />;
+            // but if we just logged out I want to redirect to home :(
+            // how can i eat my cake and have it too?
+            // there must be a way
           }
           // if (!currentUser?.accepted_tnc) {
           //   return (<TermsAndConditions {...combinedProps} />);
@@ -268,8 +277,8 @@ export default function App() {
           if (isAuthenticated()) {
             // NEED TO DIRECT TO PARTICULAR USER HERE -> this is what happens after logged in successfully
             // WHY ARE THESE NOT BEING SET?????????????
-            console.log("cntx!!!!!!!!!!!", userCtx);
-            console.log("current user!!!!!!!!!!!!!!!!!!", currentUser);
+            // console.log("cntx!!!!!!!!!!!", userCtx);
+            // console.log("current user!!!!!!!!!!!!!!!!!!", currentUser);
             // return <Redirect to={`/user_profile/${currentUser?.first_name}`} />;
             return <Redirect to={`/user_profile`} />;
           }
@@ -497,6 +506,7 @@ export default function App() {
                 // path contains primary key (id) of user in question
                 path="/user_profile"
                 component={UserProfile}
+                setRedirectTo={setRedirectTo}
               />
               <AuthorizedRoute exact path="/settings" component={Settings} />
               <AuthorizedRoute exact path="/video" component={Video} />

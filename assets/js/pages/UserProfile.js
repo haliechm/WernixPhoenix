@@ -54,7 +54,7 @@ export default function UserProfile(props) {
 
   return (
     <Fragment>
-      <NavBarSignedIn />
+      <NavBarSignedIn setRedirectTo={props.setRedirectTo}/>
       <UserProfileTop />
       <Container className="no-padding mb-0 pb-0 profile-top" fluid>
         <Row className="my-1 mr-1 profile-page-background">

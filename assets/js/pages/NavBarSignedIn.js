@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { PopUpModal } from "./";
 import {
@@ -23,7 +23,30 @@ export default function NavBarMain(props) {
   const userCtx = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [popUpModalOpen, setPopUpModalOpen] = useState(false);
+  const [saveChanges, setSaveChanges] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  function logout() {
+    setSaveChanges(false);
+    props.setRedirectTo("/");
+    api
+      .post("log_out")
+      .then((response) => {
+        userCtx.signOut();
+      })
+      .catch((error) => {
+        console.error(error);
+        userCtx.signOut();
+        Alert.error("There was an error logging out");
+      });
+  }
+
+  useEffect(() => {
+    // if user clicked logout on popout modal: 
+    if (saveChanges) {
+      logout();
+    }
+  }, [saveChanges]);
 
   return (
     // navbar for when user is signed in
@@ -31,6 +54,7 @@ export default function NavBarMain(props) {
       <PopUpModal
         popUpModalOpen={popUpModalOpen}
         setPopUpModalOpen={setPopUpModalOpen}
+        setSaveChanges={setSaveChanges}
         action={"Logout"}
       />
       <NavbarBrand className="ml-3 mr-4" href="user_profile">

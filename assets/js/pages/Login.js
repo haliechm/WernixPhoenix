@@ -40,6 +40,7 @@ export default function Login() {
     localStorage.getItem("lastUsername") || ""
   );
   const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState("");
   const [message, setMessage] = useState(null);
   const [redirectTo, setRedirectTo] = useState(null);
 
@@ -169,14 +170,24 @@ export default function Login() {
               </FormGroup>
               <FormGroup row>
                 <Col className="up-front">
-                  <Input
-                    type="password"
-                    name="password"
-                    id="user_password"
-                    placeholder="password"
-                    value={password}
-                    onChange={handlePassword}
-                  />
+                  <div className="pass-wrapper">
+                    <Input
+                      type={passwordShown ? "text" : "password"}
+                      name="password"
+                      id="user_password"
+                      placeholder="password"
+                      value={password}
+                      onChange={handlePassword}
+                    />
+                    <i
+                      onClick={() => setPasswordShown(!passwordShown)}
+                      className={
+                        passwordShown
+                          ? "fas fa-eye-slash eyeball"
+                          : "fas fa-eye eyeball"
+                      }
+                    ></i>
+                  </div>
                 </Col>
               </FormGroup>
               <FormGroup row>

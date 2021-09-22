@@ -250,13 +250,9 @@ export default function Home(props) {
                 We match each user with other users in a way that both parties
                 can benefit. For example, if you want to practice Russian and
                 are fluent in English, you will be matched with users that are
-                fluent in Russian and want to speak English
-              </li>
-              <li className="arrow-small">
-                You will be matched with users depending on both your and their
-                experience levels. You can choose if you would rather be matched
-                with people who are proficient at speaking your native language
-                or people who are just beginning
+                fluent in Russian and want to speak English. In addition, you
+                will be matched with users depending on both your and their skill
+                level.
               </li>
               <li className="arrow-small">
                 Users are able to rate their experience with another user. As a
