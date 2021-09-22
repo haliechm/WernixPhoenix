@@ -9,12 +9,36 @@ export default function EditAccount(props) {
   const userCtx = useContext(UserContext);
   const [popUpModalOpen, setPopUpModalOpen] = useState(false);
   const [action, setAction] = useState("");
+  const [saveChanges, setSaveChanges] = useState(false);
+
+  function logout() {
+    setSaveChanges(false);
+    props.setRedirectTo("/");
+    api
+      .post("log_out")
+      .then((response) => {
+        userCtx.signOut();
+      })
+      .catch((error) => {
+        console.error(error);
+        userCtx.signOut();
+        Alert.error("There was an error logging out");
+      });
+  }
+
+  useEffect(() => {
+    // if user clicked logout on popout modal:
+    if (saveChanges) {
+      logout();
+    }
+  }, [saveChanges]);
 
   return (
     <Fragment>
       <PopUpModal
         popUpModalOpen={popUpModalOpen}
         setPopUpModalOpen={setPopUpModalOpen}
+        setSaveChanges={setSaveChanges}
         action={action}
       />
       <Form>

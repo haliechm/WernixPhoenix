@@ -43,7 +43,7 @@ export default function Settings(props) {
             ) : chosenToEdit == "LANGUAGE" ? (
               <EditLanguage />
             ) : (
-              <EditAccount />
+              <EditAccount setRedirectTo={props.setRedirectTo} />
             )}
           </Col>
         </Row>
