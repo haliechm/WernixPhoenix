@@ -34,11 +34,32 @@ defmodule E2Quizzical.User do
     belongs_to :deactivated_by_user, E2Quizzical.User
     has_many :user_roles, E2Quizzical.UserRole, on_delete: :delete_all
     timestamps()
+
+    belongs_to :native_language, E2Quizzical.Language
+    belongs_to :learning_language, E2Quizzical.Language
+    field :rating, :float
+    field :is_visible, :boolean
+    belongs_to :skill_level, E2Quizzical.SkillLevel
+    field :is_online, :boolean
+    field :birthdate, :date
+
+    # MIGHT NEED TO ADD LIKE HAS_MANY'S FOR WHERE USERS IS THE FOREIGN KEY (many part of one-to-many)
+
+    
   end
+
+  #     add :native_language_id, references(:languages, type: :integer), default: 1, null: false
+  #     add :learning_language_id, references(:languages, type: :integer), default: 2, null: false
+  #     add :rating, :float, default: 2.5, null: false
+  #     add :is_visible, :boolean, default: true, null: false
+  #     add :skill_level_id, references(:skill_levels, type: :integer), default: 2, null: false
+  #     add :is_online, :boolean, default: true, null: false
+  #     add :birthdate, :date, null: true
 
   @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
     reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
-    failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa)a
+    failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
+    native_language_id learning_language_id rating is_visible skill_level is_online birthdate)a
 
   # not entirely clear how this is working - but it is changing the User table?
   # NEED TO UNDERSTAND THIS

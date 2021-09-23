@@ -29,6 +29,7 @@
                         'Elixir.E2Quizzical.Language',
                         'Elixir.E2Quizzical.LogonAttempt',
                         'Elixir.E2Quizzical.Mailer',
+                        'Elixir.E2Quizzical.Message',
                         'Elixir.E2Quizzical.PDFRender',
                         'Elixir.E2Quizzical.Repo','Elixir.E2Quizzical.Role',
                         'Elixir.E2Quizzical.Scheduler',
