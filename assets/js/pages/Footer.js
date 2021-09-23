@@ -1,8 +1,26 @@
-import React, { Fragment } from "react";
+import React, { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { api, helpers, contexts, constants } from "../utils";
+const { UserContext } = contexts;
 
 const FooterPagePro = (props) => {
+  const userCtx = useContext(UserContext);
+
+  function logout() {
+    props.setRedirectTo("/");
+    api
+      .post("log_out")
+      .then((response) => {
+        userCtx.signOut();
+      })
+      .catch((error) => {
+        console.error(error);
+        userCtx.signOut();
+        Alert.error("There was an error logging out");
+      });
+  }
+
   return (
     <MDBFooter className="page-footer font-small pt-4 mt-4 bg-dark text-light">
       {/* <div className="footer-copyright text-center py-3">
@@ -61,7 +79,7 @@ const FooterPagePro = (props) => {
                 {props.mainPage ? (
                   <Link to="login">Log In</Link>
                 ) : (
-                  <Link to="/">Sign Out</Link>
+                  <Link onClick={logout}>Sign Out</Link>
                 )}
               </li>
             </ul>

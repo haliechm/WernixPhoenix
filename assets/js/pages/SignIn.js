@@ -113,7 +113,7 @@ export default function SignIn(props) {
                         Sign In
                       </Button>
                     </div>
-                    <div className="text-left mt-2">
+                    {/* <div className="text-left mt-2">
                       <Link
                         to={{
                           pathname: "/forgot_password",
@@ -123,7 +123,7 @@ export default function SignIn(props) {
                       >
                         Misplaced your password?
                       </Link>
-                    </div>
+                    </div> */}
                   </Form>
                 </Col>
               </Row>

@@ -190,6 +190,7 @@ export default function Login() {
                   </div>
                 </Col>
               </FormGroup>
+
               <FormGroup row>
                 <Col>
                   <Button
@@ -223,6 +224,20 @@ export default function Login() {
                 </Link>
                 .
               </FormText>
+
+              {/* <FormText>
+                <Col>
+                  <Link
+                  to={{
+                    pathname: "/forgot_password",
+                    state: { email: username },
+                    push: true,
+                  }}
+                  >
+                    forgot password?
+                  </Link>
+                </Col>
+              </FormText> */}
 
               {/* modals */}
               <TermsAndPrivacyModal
