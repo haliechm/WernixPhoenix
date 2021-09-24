@@ -258,6 +258,7 @@ defmodule E2QuizzicalWeb.PublicController do
     |> User.set_last_login()
 
     user_info = User.get_one(user.id)
+    # SO I'M THINKING THAT IN THE SCHEMA FOR USER, NEED TO CHANGE GET_ONE TO SHOW ALL FIELDS THAT WE WANT
     IO.puts "==============================================> user info is #{inspect(user_info)}"
     # {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user_info, %{some: "claim"}, token_type: "refresh", ttl: {12, :hours})
     {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user_info)

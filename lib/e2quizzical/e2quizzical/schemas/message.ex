@@ -5,8 +5,10 @@ defmodule E2Quizzical.Message do
 
   @timestamps_opts [type: :utc_datetime]
   schema "messages" do
-    field :created_by_id, :integer
-    field :received_by_id, :integer
+    belongs_to :created_by, E2Quizzical.User
+    # field :created_by_id, :integer
+    belongs_to :received_by, E2Quizzical.User
+    # field :received_by_id, :integer
     field :content, :string 
     timestamps()
   end

@@ -5,8 +5,10 @@ defmodule E2Quizzical.Friendship do
 
   @timestamps_opts [type: :utc_datetime]
   schema "friendships" do
-    field :friend_1_id, :integer
-    field :friend_2_id, :integer
+    # field :friend_1_id, :integer
+    belongs_to :friend_1, E2Quizzical.User
+    # field :friend_2_id, :integer
+    belongs_to :friend_2, E2Quizzical.User
     timestamps()
   end
 

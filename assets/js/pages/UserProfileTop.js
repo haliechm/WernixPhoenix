@@ -2,10 +2,34 @@ import React, { useContext } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { api, helpers, contexts, constants } from "../utils";
+import _ from "lodash";
 const { UserContext } = contexts;
 
 export default function UserProfileTop(props) {
   const userCtx = useContext(UserContext);
+
+  function getStars() {
+    let stars = [];
+    let wholeNumber = Math.floor(userCtx.currentUser?.rating);
+    let decimalNumber = (userCtx.currentUser?.rating % 1).toFixed(2);
+    let totalNumStars = 5;
+
+    // whole-stars
+    for (let i = 0; i < wholeNumber; i++) {
+      stars.push(<i class="fas fa-star"></i>);
+    }
+
+    // determine if half-star or whole-star based on decimal part
+    if (decimalNumber != 0.0) {
+      stars.push(<i class="fas fa-star-half-alt"></i>);
+    }
+    // add empty starts if any left
+    for (let i = 0; i < totalNumStars + 1 - stars.length; i++) {
+      stars.push(<i class="far fa-star"></i>);
+    }
+
+    return stars;
+  }
   return (
     <Container id="profile-top" className="no-padding mb-0 pb-0" fluid>
       <Row id="profile-page-background" className="profile-row">
@@ -31,12 +55,17 @@ export default function UserProfileTop(props) {
           <h6>@{userCtx.currentUser?.username || "NO USERNAME"}</h6>
           <h6>22 Friends</h6>
           <h6>Joined on 08/03/2021</h6>
+          <h6>Joined on {userCtx.currentUser?.inserted_at}</h6>
+          {/* based on rating, show certain stars */}
+
           <h6>
-            <i class="fas fa-star"></i>
+            {getStars()}
+            {/* <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
             <i class="fas fa-star-half-alt"></i>
             <i class="far fa-star"></i>
-            <i class="far fa-star"></i> (2.5/5.0)
+            <i class="far fa-star"></i>  */}
+            ({userCtx.currentUser?.rating}/5.0)
           </h6>
         </Col>
         <Col></Col>

@@ -78,11 +78,15 @@ export default function UserProfile(props) {
                 <h5 className="profile-header">LANGUAGE INFO</h5>
                 <div id="language-info">
                   <p>
-                    <b>native language:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{" "}
-                    English
+                    {/* <h3>
+                      {userCtx.currentUser?.first_name || "NO FIRST NAME"}
+                    </h3> */}
+                    <b>native language:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{" "}
+                    {userCtx.currentUser?.native_language}
                   </p>
                   <p>
-                    <b>learning language:&nbsp;&nbsp;</b> Russian
+                    <b>learning language:&nbsp;&nbsp;</b>{" "}
+                    {userCtx.currentUser?.learning_language}
                   </p>
                 </div>
               </Col>

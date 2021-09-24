@@ -59,7 +59,7 @@ defmodule E2Quizzical.User do
   @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
     reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
     failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
-    native_language_id learning_language_id rating is_visible skill_level is_online birthdate)a
+    native_language_id learning_language_id rating is_visible skill_level_id is_online birthdate)a
 
   # not entirely clear how this is working - but it is changing the User table?
   # NEED TO UNDERSTAND THIS
@@ -208,7 +208,12 @@ defmodule E2Quizzical.User do
   end
 
   def get_one(id) do
-    build_query(%{"id" => id})
+    # build_query(%{"id" => id})
+    # |> Repo.one()
+    # |> augment_user()
+
+    # retrying here probably wrong:
+    build_query2(%{"id" => id})
     |> Repo.one()
     |> augment_user()
   end
@@ -261,10 +266,52 @@ defmodule E2Quizzical.User do
       id: u.id,
       deactivated_at: u.deactivated_at,
       email: u.email,
+      native_language: u.native_language_id,
       username: u.username,
       first_name: u.first_name,
       middle_name: u.middle_name,
       last_name: u.last_name,
+      rating: u.rating,
+      last_login_at: u.last_login_at,
+      failed_attempt_count: u.failed_attempt_count,
+      last_locked_out_at: u.last_locked_out_at,
+      roles: fragment("((SELECT array_to_string(array(
+          SELECT rl.name
+          FROM roles rl INNER JOIN user_roles ur ON ur.role_id = rl.id
+          WHERE ur.user_id = ?
+            AND ur.deactivated_at is null), ',')))", u.id),
+      timezone: u.timezone,
+      reset_password_token: u.reset_password_token,
+      updated_at: u.updated_at,
+      inserted_at: u.inserted_at,
+      must_change_password: u.must_change_password,
+      # two_factor_key: u.two_factor_key,
+      # two_factor_key_created_at: u.two_factor_key_created_at,
+      # disable_2fa: u.disable_2fa,
+      mobile_number: u.mobile_number,
+      image_url: u.image_url,
+      mime_type: u.mime_type
+    })
+  end
+
+  def build_query2(params) do
+    (from u in User)
+    |> query_builder(params)
+    |> apply_sort(params)
+    |> join(:inner, [u], nl in assoc(u, :native_language))
+    |> join(:inner, [u, nl], ll in assoc(u, :learning_language))
+    |> select([u, nl, ll], %{
+      id: u.id,
+      deactivated_at: u.deactivated_at,
+      email: u.email,
+      native_language: nl.name,
+      learning_language: ll.name,
+      username: u.username,
+      rating: u.rating,
+      first_name: u.first_name,
+      middle_name: u.middle_name,
+      last_name: u.last_name,
+      rating: u.rating,
       last_login_at: u.last_login_at,
       failed_attempt_count: u.failed_attempt_count,
       last_locked_out_at: u.last_locked_out_at,

@@ -5,8 +5,10 @@ defmodule E2Quizzical.Blocking do
 
   @timestamps_opts [type: :utc_datetime]
   schema "blockings" do
-    field :blocked_by_id, :integer
-    field :blocked_id, :integer
+    belongs_to :blocked_by, E2Quizzical.User
+    # field :blocked_by_id, :integer
+    belongs_to :blocked, E2Quizzical.User
+    # field :blocked_id, :integer
     timestamps()
   end
 

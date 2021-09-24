@@ -93,6 +93,7 @@ export default function Login() {
       .then((response) => {
         if (response.data.success) {
           console.log("getting here");
+          console.log("THE RESPONSE:::::::::: ", response.data);
           // LOOKS LIKE currentUser OF USERCONTEXT IS NOT BEING SET HERE
           console.log("------ SIGNING IN: ", userCtx);
           setMessage({ flavor: "success", text: "Log-In Successful!" });
@@ -106,6 +107,7 @@ export default function Login() {
           // usercontext being automatically set value of const user in app.js on line 468
           // what is response.data.user?
           // user.userinfo should contain all data of user row from table (it does)
+          // but does it contain all the new fields i just put in?? 
           console.log("------ response.data.user: ", response.data.user);
           userCtx.signIn(response.data.user, response.data.token);
           console.log("------ SIGNED IN (2): ", userCtx);
