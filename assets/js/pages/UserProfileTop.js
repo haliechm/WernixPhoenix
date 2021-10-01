@@ -18,7 +18,6 @@ export default function UserProfileTop(props) {
     for (let i = 0; i < wholeNumber; i++) {
       stars.push(<i class="fas fa-star"></i>);
     }
-
     // determine if half-star or whole-star based on decimal part
     if (decimalNumber != 0.0) {
       stars.push(<i class="fas fa-star-half-alt"></i>);
@@ -30,20 +29,24 @@ export default function UserProfileTop(props) {
 
     return stars;
   }
+
+  function getJoinedOnDate() {
+    let splitUpDate = userCtx.currentUser?.inserted_at?.split(/[- : T Z]/);
+    if (splitUpDate) {
+      return `${splitUpDate[1]}/${splitUpDate[2]}/${splitUpDate[0]}`;
+    } else {
+      return "not available";
+    }
+  }
   return (
     <Container id="profile-top" className="no-padding mb-0 pb-0" fluid>
       <Row id="profile-page-background" className="profile-row">
-        <Col
-          md={{ size: 3, offset: 0 }}
-          //   xs={{ size: 4, offset: 0 }}
-          className="no-padding py-2 mb-2"
-        >
+        <Col md={{ size: 3, offset: 0 }} className="no-padding py-2 mb-2">
           <img
             src="https://picsum.photos/180/180"
             alt="profile picture"
             style={{ borderRadius: "90px", border: "3px solid #308552" }}
           ></img>
-          {/* <Image source={{ uri: "https://picsum.photos/200/200" }}/> */}
         </Col>
 
         <Col
@@ -54,18 +57,9 @@ export default function UserProfileTop(props) {
           <h3>{userCtx.currentUser?.first_name || "NO FIRST NAME"}</h3>
           <h6>@{userCtx.currentUser?.username || "NO USERNAME"}</h6>
           <h6>22 Friends</h6>
-          <h6>Joined on 08/03/2021</h6>
-          <h6>Joined on {userCtx.currentUser?.inserted_at}</h6>
-          {/* based on rating, show certain stars */}
-
+          <h6>Joined on {getJoinedOnDate()}</h6>
           <h6>
-            {getStars()}
-            {/* <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star-half-alt"></i>
-            <i class="far fa-star"></i>
-            <i class="far fa-star"></i>  */}
-            ({userCtx.currentUser?.rating}/5.0)
+            {getStars()}({userCtx.currentUser?.rating}/5.0)
           </h6>
         </Col>
         <Col></Col>
