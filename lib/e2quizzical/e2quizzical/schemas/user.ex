@@ -286,11 +286,13 @@ defmodule E2Quizzical.User do
     Enum.concat(
       user
       |> Ecto.assoc(:friends)
-      |> Repo.all(), 
+      |> Repo.all()
+      |> Repo.preload([:skill_level, :native_language, :learning_language]), 
       
       user
       |> Ecto.assoc(:reverse_friends)
       |> Repo.all()
+      |> Repo.preload([:skill_level, :native_language, :learning_language])
     )
 
     # user
@@ -332,7 +334,9 @@ defmodule E2Quizzical.User do
     # SKILL LEVEL NOT WORKING FOR CLEAN FRIEND
     # PROBABLY NL AND LL WON'T WORK EITHER 
     IO.puts("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-    %{username: user.username, first_name: user.first_name, is_online: user.is_online}
+    IO.inspect(user);
+    %{username: user.username, first_name: user.first_name, is_online: user.is_online, skill_level: user.skill_level.name,
+      native_language: user.native_language.name, learning_language: user.learning_language.name}
   end
 
   def clean_friends(list_of_users) do

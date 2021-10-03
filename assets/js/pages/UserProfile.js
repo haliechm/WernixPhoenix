@@ -15,6 +15,7 @@ export default function UserProfile(props) {
   // const [user, setUser] = useState(defaultNewUser);
   const [usernameChosen, setUsernameChosen] = useState(""); // username of friends
   const [userModalOpen, setUserModalOpen] = useState(false); // friends modal (userModal)
+  const [friendChosen, setFriendChosen] = useState();
 
   // const routeUserId = props?.computedMatch?.params?.id
   //   ? parseInt(props.computedMatch.params.id, 10)
@@ -70,6 +71,7 @@ export default function UserProfile(props) {
                   setUsernameChosen={setUsernameChosen}
                   setUserModalOpen={setUserModalOpen}
                   userModalOpen={userModalOpen}
+                  setFriendChosen={setFriendChosen}
                 />
               </Col>
             </Row>
@@ -113,6 +115,7 @@ export default function UserProfile(props) {
         userModalOpen={userModalOpen}
         setUserModalOpen={setUserModalOpen}
         usernameChosen={usernameChosen}
+        friendChosen = {friendChosen}
       />
     </Fragment>
   );

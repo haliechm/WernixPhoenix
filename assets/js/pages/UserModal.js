@@ -32,7 +32,8 @@ export default function UserModal(props) {
       >
         <ModalHeader toggle={toggle}>
           {/* CHANGE THIS BASED IF THEY ARE ONLINE OR OFFLINE */}
-          <i class="fas fa-circle online mr-2"></i>
+          {props.friendChosen?.is_online ? <i class="fas fa-circle online mr-2"></i> : <i class="fas fa-circle offline mr-2"></i>}
+          
           <b>{props.usernameChosen}</b>
         </ModalHeader>
         <ModalBody className="modal-body">
@@ -44,9 +45,9 @@ export default function UserModal(props) {
           />
           <p>
             Native
-            Language:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Russian
+            Language:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.friendChosen?.native_language}
           </p>
-          <p>Learning Language:&nbsp;&nbsp;&nbsp;&nbsp;English</p>
+          <p>Learning Language:&nbsp;&nbsp;&nbsp;&nbsp;{props.friendChosen?.learning_language}</p>
           <hr />
           <Row>
             <Col xs={{ size: 8, offset: 2 }}>

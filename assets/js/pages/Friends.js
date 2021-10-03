@@ -43,6 +43,7 @@ export default function Friends(props) {
         onClick={() => {
           props.setUserModalOpen(!props.userModalOpen);
           props.setUsernameChosen(currentFriend?.username);
+          props.setFriendChosen(currentFriend)
         }}
       >
         {/* now need to be able to determine if friend is online */}
@@ -53,9 +54,9 @@ export default function Friends(props) {
       </Link>);
   }
 
-  function getFriends() {
-    return _.map(userCtx?.friends, linkifyFriend)
-  }
+  // function getFriends() {
+  //   return _.map(userCtx?.friends, linkifyFriend)
+  // }
   return (
     <div className="friends-list">
   
