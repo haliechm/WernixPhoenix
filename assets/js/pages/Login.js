@@ -110,6 +110,11 @@ export default function Login() {
           // but does it contain all the new fields i just put in?? 
           console.log("------ response.data.user: ", response.data.user);
           userCtx.signIn(response.data.user, response.data.token);
+          console.log("--------------------------------------------- i am here");
+
+          // THIS IS WORKING!!!!
+          console.log("=============================================> friends: ", response.data.friends);
+          userCtx.setFriends(response.data.friends);
           console.log("------ SIGNED IN (2): ", userCtx);
         } else {
           console.log("actually, getting here");

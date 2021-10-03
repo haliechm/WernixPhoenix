@@ -6,18 +6,21 @@ defmodule E2Quizzical.Friendship do
   @timestamps_opts [type: :utc_datetime]
   schema "friendships" do
     # field :friend_1_id, :integer
-    belongs_to :friend_1, E2Quizzical.User
+    # belongs_to :friend_1, E2Quizzical.User
+    belongs_to :user, E2Quizzical.User
     # field :friend_2_id, :integer
     belongs_to :friend_2, E2Quizzical.User
     timestamps()
   end
 
-  @available_fields ~w(friend_1_id friend_2_id)a
+  # @available_fields ~w(friend_1_id friend_2_id)a
+  @available_fields ~w(user_id friend_2_id)a
 
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @available_fields)
-    |> unique_constraint([:friend_1_id, :friend_2_id], message: "Friendship already exists.")
+    # |> unique_constraint([:friend_1_id, :friend_2_id], message: "Friendship already exists.")
+    |> unique_constraint([:user_id, :friend_2_id], message: "Friendship already exists.")
   end
 
 end

@@ -31,6 +31,7 @@ export default function UserProfileTop(props) {
   }
 
   function getJoinedOnDate() {
+    // this might only work for utc dates [we are only using utc dates for the timestamps]
     let splitUpDate = userCtx.currentUser?.inserted_at?.split(/[- : T Z]/);
     if (splitUpDate) {
       return `${splitUpDate[1]}/${splitUpDate[2]}/${splitUpDate[0]}`;
@@ -38,6 +39,16 @@ export default function UserProfileTop(props) {
       return "not available";
     }
   }
+
+  // function getNumOfFriends() {
+  //   // NEED TO CHECK TO SEE WHAT HAPPENS IF YOU HAVE 0 FRIENDS OR JUST 1 FRIEND!!!!!!!!
+  //   let listOfFriends = userCtx.currentUser
+  //     ? userCtx.currentUser.friends.length == 0
+  //       ? []
+  //       : userCtx.currentUser.friends.split(",")
+  //     : [];
+  //   return listOfFriends.length;
+  // }
   return (
     <Container id="profile-top" className="no-padding mb-0 pb-0" fluid>
       <Row id="profile-page-background" className="profile-row">
@@ -56,7 +67,10 @@ export default function UserProfileTop(props) {
         >
           <h3>{userCtx.currentUser?.first_name || "NO FIRST NAME"}</h3>
           <h6>@{userCtx.currentUser?.username || "NO USERNAME"}</h6>
-          <h6>22 Friends</h6>
+          <h6>
+            {/* {getNumOfFriends()} {getNumOfFriends() == 1 ? "Friend" : "Friends"} */}
+            {userCtx?.friends?.length} {userCtx?.friends?.length == 1 ? "Friend" : "Friends"}
+          </h6>
           <h6>Joined on {getJoinedOnDate()}</h6>
           <h6>
             {getStars()}({userCtx.currentUser?.rating}/5.0)

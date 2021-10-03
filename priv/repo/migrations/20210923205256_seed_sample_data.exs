@@ -19,20 +19,20 @@ defmodule E2Quizzical.Repo.Migrations.SeedSampleData do
 
     # }
 
-    E2Quizzical.Repo.insert!(%E2Quizzical.User{
-      first_name: "Cassidy",
-      middle_name: "Teresa",
-      last_name: "Chmura",
-      email: "talktoctc@gmail.com",
-      username: "cassidyt",
-      native_language: E2Quizzical.Repo.get(E2Quizzical.Language, 3),
-      learning_language: E2Quizzical.Repo.get(E2Quizzical.Language, 1),
-      rating: 4.78,
-      is_visible: true,
-      skill_level: E2Quizzical.Repo.get(E2Quizzical.SkillLevel, 4),
-      is_online: true
+    # E2Quizzical.Repo.insert!(%E2Quizzical.User{
+    #   first_name: "Cassidy",
+    #   middle_name: "Teresa",
+    #   last_name: "Chmura",
+    #   email: "talktoctc@gmail.com",
+    #   username: "cassidyt",
+    #   native_language: E2Quizzical.Repo.get(E2Quizzical.Language, 3),
+    #   learning_language: E2Quizzical.Repo.get(E2Quizzical.Language, 1),
+    #   rating: 4.78,
+    #   is_visible: true,
+    #   skill_level: E2Quizzical.Repo.get(E2Quizzical.SkillLevel, 4),
+    #   is_online: true
 
-    })
+    # })
 
     end
 

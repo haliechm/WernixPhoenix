@@ -49,6 +49,7 @@ export default function App() {
   const isImpersonating = localStorage.getItem("adminToken") ? true : false;
   const [authToken, setAuthToken] = useState(tokenFromStorage);
   const [currentUser, setCurrentUser] = useState(parsedUser);
+  const [friends, setFriends] = useState([]);
   const [impersonating, setImpersonation] = useState(isImpersonating);
   const [alertMessage, setAlertMessage] = useState(null);
   const [signInMessageVisible, setSignInMessageVisible] = useState(false);
@@ -333,6 +334,8 @@ export default function App() {
 
   const user = {
     currentUser: currentUser,
+    friends: friends,
+    setFriends: setFriends,
     // changeCurrentUser: setCurrentUser, // I added this
     impersonating: impersonating,
     impersonate: impersonate,

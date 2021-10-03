@@ -35,13 +35,21 @@ defmodule E2Quizzical.User do
     has_many :user_roles, E2Quizzical.UserRole, on_delete: :delete_all
     timestamps()
 
-    belongs_to :native_language, E2Quizzical.Language
-    belongs_to :learning_language, E2Quizzical.Language
+    # belongs_to :native_language, E2Quizzical.Language
+    # belongs_to :learning_language, E2Quizzical.Language
     field :rating, :float
     field :is_visible, :boolean
     belongs_to :skill_level, E2Quizzical.SkillLevel
     field :is_online, :boolean
     field :birthdate, :date
+
+
+
+    has_many :friendships, E2Quizzical.Friendship, on_delete: :delete_all
+    has_many :reverse_friendships, E2Quizzical.Friendship, on_delete: :delete_all, foreign_key: :friend_2_id
+
+    has_many :friends, through: [:friendships, :friend_2]
+    has_many :reverse_friends, through: [:reverse_friendships, :user]
 
     # MIGHT NEED TO ADD LIKE HAS_MANY'S FOR WHERE USERS IS THE FOREIGN KEY (many part of one-to-many)
 
@@ -56,10 +64,14 @@ defmodule E2Quizzical.User do
   #     add :is_online, :boolean, default: true, null: false
   #     add :birthdate, :date, null: true
 
+  # @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
+  #   reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
+  #   failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
+  #   native_language_id learning_language_id rating is_visible skill_level_id is_online birthdate)a
   @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
     reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
     failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
-    native_language_id learning_language_id rating is_visible skill_level_id is_online birthdate)a
+    rating is_visible skill_level_id is_online birthdate)a
 
   # not entirely clear how this is working - but it is changing the User table?
   # NEED TO UNDERSTAND THIS
@@ -218,6 +230,118 @@ defmodule E2Quizzical.User do
     |> augment_user()
   end
 
+
+  def get_friends(user) do
+    # build_query3(%{"id" => id})
+    # |> Repo.one()
+    # query = from friendship in Friendship
+    #         select friendship
+#     query = fragment("((select t1.friend1 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t1
+# where t1.friend1_id != ?
+
+# union 
+
+# select t2.friend2 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t2
+# where t2.friend2_id != ?))", id, id, id, id, id, id)
+#  query = "((select t1.friend1 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t1
+# where t1.friend1_id != ?
+
+# union 
+
+# select t2.friend2 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t2
+# where t2.friend2_id != ?))"
+
+    # User 
+    # |> select([e], %{
+
+
+
+    # })
+    # IO.puts("====================================================================================================>")
+    # IO.inspect(Repo.all(query))
+    # IO.puts("====================================================================================================>")
+    # Repo.all(query)
+    IO.puts("GETTTTTTTTTTTTTTTTTTTTTTTTTTTTING HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    IO.inspect(user);
+    Enum.concat(
+      user
+      |> Ecto.assoc(:friends)
+      |> Repo.all(), 
+      
+      user
+      |> Ecto.assoc(:reverse_friends)
+      |> Repo.all()
+    )
+
+    # user
+    # |> Ecto.assoc(:friends)
+    # |> Repo.all()
+
+    # user
+    # |> Ecto.assoc(:reverse_friends)
+    # |> Repo.all()
+
+
+
+#     (from u0 in User)
+#     |> join(:inner, [u], f in assoc(u, :friend_2))
+
+# E2Quizzical.UserRole
+#     |> join(:inner, [ur], r in assoc(ur, :role))
+#     |> where([ur, r], ur.user_id == ^user_id)
+#     |> select([ur, r], r.name)
+#     |> Repo.all()
+
+
+
+#     (from u in User)
+#     |> join 
+#     |> where([u], is_nil(u.deactivated_at))
+#     |> order_by([u], asc: u.first_name, asc: u.last_name)
+#     |> select([u], %{
+#       id: u.id,
+#       name: fragment("concat(?, ' ', ?)", u.first_name, u.last_name)
+#     })
+#     |> Repo.all()
+      
+    # Repo.all(Ecto.assoc(CURRENTUSER, :friends))
+
+  end 
+
+  def clean_friend(user) do
+    # SKILL LEVEL NOT WORKING FOR CLEAN FRIEND
+    # PROBABLY NL AND LL WON'T WORK EITHER 
+    IO.puts("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    %{username: user.username, first_name: user.first_name, is_online: user.is_online}
+  end
+
+  def clean_friends(list_of_users) do
+    IO.puts("***************************************************************")
+    Enum.map(list_of_users, fn(user) -> clean_friend(user) end)
+    # loop through friends and make map for each with fields: username, **NL**, **LL**, is_online, skill_level, first_name
+
+  end
+
 # Query API
   def apply_sort(query, %{"sort_field" => sort_field_string, "sort_dir" => sort_dir}) do
     dir = case sort_dir do
@@ -294,18 +418,21 @@ defmodule E2Quizzical.User do
     })
   end
 
+  
+
   def build_query2(params) do
     (from u in User)
     |> query_builder(params)
     |> apply_sort(params)
-    |> join(:inner, [u], nl in assoc(u, :native_language))
-    |> join(:inner, [u, nl], ll in assoc(u, :learning_language))
-    |> select([u, nl, ll], %{
+    # |> join(:inner, [u], nl in assoc(u, :native_language))
+    # |> join(:inner, [u, nl], ll in assoc(u, :learning_language))
+    # |> select([u, nl, ll], %{
+    |> select([u], %{
       id: u.id,
       deactivated_at: u.deactivated_at,
       email: u.email,
-      native_language: nl.name,
-      learning_language: ll.name,
+      # native_language: nl.name,
+      # learning_language: ll.name,
       username: u.username,
       rating: u.rating,
       first_name: u.first_name,
@@ -320,6 +447,41 @@ defmodule E2Quizzical.User do
           FROM roles rl INNER JOIN user_roles ur ON ur.role_id = rl.id
           WHERE ur.user_id = ?
             AND ur.deactivated_at is null), ',')))", u.id),
+#       friends: fragment("((select array_to_string(array(select t1.friend1 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t1
+# where t1.friend1_id != ?
+
+# union 
+
+# select t2.friend2 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.friend_1_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.friend_1_id = ? or f.friend_2_id = ? ) as t2
+# where t2.friend2_id != ?), ',')))", u.id, u.id, u.id, u.id, u.id, u.id),
+# friends: fragment("((select array_to_string(array(select t1.friend1 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.user_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.user_id = ? or f.friend_2_id = ? ) as t1
+# where t1.friend1_id != ?
+
+# union 
+
+# select t2.friend2 as friend_username from
+# (select u01.id as FRIEND1_ID, u01.username as FRIEND1, u02.id as FRIEND2_ID, u02.username as FRIEND2
+# from users u01
+# inner join friendships f on u01.id = f.user_id
+# inner join users u02 on u02.id = f.friend_2_id
+# where f.user_id = ? or f.friend_2_id = ? ) as t2
+# where t2.friend2_id != ?), ',')))", u.id, u.id, u.id, u.id, u.id, u.id),
+ 
       timezone: u.timezone,
       reset_password_token: u.reset_password_token,
       updated_at: u.updated_at,
@@ -333,6 +495,14 @@ defmodule E2Quizzical.User do
       mime_type: u.mime_type
     })
   end
+
+  # def build_query3(params) do
+  #   (from u in User) 
+  #   |> query_builder(params)
+  #   |> apply_sort(params)
+  #   |> join
+
+  # end
 
   def get_profile_picture_url(%{image_url: u}) when is_nil(u), do: nil
   def get_profile_picture_url(model) do

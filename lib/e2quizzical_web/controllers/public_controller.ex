@@ -253,9 +253,27 @@ defmodule E2QuizzicalWeb.PublicController do
   end
 
   defp sign_in_ok_response(conn, user) do
+
+    IO.puts("GETTING HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    # here now get a list of all the friends
+    friends = 
+      user 
+      |> User.get_friends()
+      |> User.clean_friends()
+    
+
+    IO.puts("################################################################")
+
+
+
     user
     |> User.clear_failed_login_attempts()
     |> User.set_last_login()
+
+    
+      
+    IO.puts("------------------------------------------------FRIENDS: ")
+    IO.inspect(friends)
 
     user_info = User.get_one(user.id)
     # SO I'M THINKING THAT IN THE SCHEMA FOR USER, NEED TO CHANGE GET_ONE TO SHOW ALL FIELDS THAT WE WANT
@@ -263,10 +281,15 @@ defmodule E2QuizzicalWeb.PublicController do
     # {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user_info, %{some: "claim"}, token_type: "refresh", ttl: {12, :hours})
     {:ok, jwt, _full_claims} = Guardian.encode_and_sign(user_info)
     IO.puts("jwt is #{jwt}")
+
+
+    # getting here but now we are having a problem!!!!!!!!! 
+    # getting a Jason error?
     json(conn, %{
       success: true,
       token: jwt, 
       user: user_info,
+      friends: friends,
       message: ""
     })
   end

@@ -3,6 +3,7 @@ import React from "react";
 const UserContext = React.createContext({
   currentUser: null,
   // changeCurrentUser: ()=>{},
+  friends: [],
   theme: null,
   fullScreenDashboard: false,
   authCurrentUser: i => {},
