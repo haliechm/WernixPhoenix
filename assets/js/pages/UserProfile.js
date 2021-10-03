@@ -82,11 +82,11 @@ export default function UserProfile(props) {
                       {userCtx.currentUser?.first_name || "NO FIRST NAME"}
                     </h3> */}
                     <b>native language:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{" "}
-                    {/* {userCtx.currentUser?.native_language} */}
+                    {userCtx.currentUser?.native_language}
                   </p>
                   <p>
                     <b>learning language:&nbsp;&nbsp;</b>{" "}
-                    {/* {userCtx.currentUser?.learning_language} */}
+                    {userCtx.currentUser?.learning_language}
                   </p>
                 </div>
               </Col>

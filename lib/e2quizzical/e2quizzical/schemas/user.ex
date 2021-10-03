@@ -35,8 +35,8 @@ defmodule E2Quizzical.User do
     has_many :user_roles, E2Quizzical.UserRole, on_delete: :delete_all
     timestamps()
 
-    # belongs_to :native_language, E2Quizzical.Language
-    # belongs_to :learning_language, E2Quizzical.Language
+    belongs_to :native_language, E2Quizzical.Language
+    belongs_to :learning_language, E2Quizzical.Language
     field :rating, :float
     field :is_visible, :boolean
     belongs_to :skill_level, E2Quizzical.SkillLevel
@@ -64,14 +64,14 @@ defmodule E2Quizzical.User do
   #     add :is_online, :boolean, default: true, null: false
   #     add :birthdate, :date, null: true
 
-  # @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
-  #   reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
-  #   failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
-  #   native_language_id learning_language_id rating is_visible skill_level_id is_online birthdate)a
   @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
     reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
     failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
-    rating is_visible skill_level_id is_online birthdate)a
+    native_language_id learning_language_id rating is_visible skill_level_id is_online birthdate)a
+  # @available_fields ~w(first_name middle_name last_name email username mobile_number timezone mime_type 
+  #   reset_password_token reset_password_requested_at must_change_password last_login_at last_locked_out_at 
+  #   failed_attempt_count deactivated_at deactivated_by_user_id two_factor_key two_factor_key_created_at disable_2fa
+  #   rating is_visible skill_level_id is_online birthdate)a
 
   # not entirely clear how this is working - but it is changing the User table?
   # NEED TO UNDERSTAND THIS
@@ -424,15 +424,15 @@ defmodule E2Quizzical.User do
     (from u in User)
     |> query_builder(params)
     |> apply_sort(params)
-    # |> join(:inner, [u], nl in assoc(u, :native_language))
-    # |> join(:inner, [u, nl], ll in assoc(u, :learning_language))
-    # |> select([u, nl, ll], %{
-    |> select([u], %{
+    |> join(:inner, [u], nl in assoc(u, :native_language))
+    |> join(:inner, [u, nl], ll in assoc(u, :learning_language))
+    |> select([u, nl, ll], %{
+    # |> select([u], %{
       id: u.id,
       deactivated_at: u.deactivated_at,
       email: u.email,
-      # native_language: nl.name,
-      # learning_language: ll.name,
+      native_language: nl.name,
+      learning_language: ll.name,
       username: u.username,
       rating: u.rating,
       first_name: u.first_name,
